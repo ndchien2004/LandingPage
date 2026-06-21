@@ -14,11 +14,11 @@ export type Craft = {
   slug: string;
   /** Tên hiển thị ngắn, ví dụ: Nghề Quạt */
   name: string;
-  /** Số thứ tự "ải" trên homepage */
+  /** Số thứ tự chương của nghề (dùng cho nhãn "Chương 01"...) */
   order: string;
-  /** Một dòng gợi mở hiển thị trên thẻ chọn ải */
+  /** Một dòng gợi mở ngắn về nghề */
   kicker: string;
-  /** Mô tả ngắn cho thẻ chọn ải ở homepage */
+  /** Mô tả ngắn về nghề (dùng ở các thẻ điều hướng) */
   cardDescription: string;
   /** Màu nhấn chủ đạo của nghề (đồng bộ với theme) */
   accent: string;

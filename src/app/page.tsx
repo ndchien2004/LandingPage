@@ -1,11 +1,11 @@
 import { Header } from "@/components/layout/Header";
-import { HeroLevelSelection } from "@/components/home/HeroLevelSelection";
+import { HeroSlider } from "@/components/home/HeroSlider";
 
 export default function Home() {
   return (
     <>
-      <Header variant="overlay" />
-      <HeroLevelSelection />
+      <Header variant="solid" />
+      <HeroSlider />
     </>
   );
 }

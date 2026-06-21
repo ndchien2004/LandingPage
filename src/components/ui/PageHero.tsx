@@ -1,5 +1,6 @@
 import { Container } from "./Container";
 import { Reveal } from "./Reveal";
+import { Breadcrumb, type Crumb } from "./Breadcrumb";
 import { cn } from "@/lib/utils";
 
 type PageHeroProps = {
@@ -8,6 +9,7 @@ type PageHeroProps = {
   subtitle?: string;
   accent?: string;
   align?: "left" | "center";
+  breadcrumb?: Crumb[];
   children?: React.ReactNode;
 };
 
@@ -18,6 +20,7 @@ export function PageHero({
   subtitle,
   accent = "#b23a2e",
   align = "left",
+  breadcrumb,
   children,
 }: PageHeroProps) {
   return (
@@ -29,6 +32,12 @@ export function PageHero({
       />
       <Container className="relative py-20 sm:py-28">
         <Reveal stagger className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
+          {breadcrumb && (
+            <Breadcrumb
+              items={breadcrumb}
+              className={cn("mb-5", align === "center" && "justify-center")}
+            />
+          )}
           {eyebrow && (
             <p className="eyebrow mb-4" style={{ color: accent }}>
               {eyebrow}

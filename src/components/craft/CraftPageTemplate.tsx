@@ -25,7 +25,7 @@ export function CraftPageTemplate({ craft }: { craft: Craft }) {
               className="eyebrow mb-4"
               style={{ color: craft.accent }}
             >
-              Ải {craft.order} — Làng nghề Chàng Sơn
+              Chương {craft.order} — Làng nghề Chàng Sơn
             </p>
             <h1 className="font-display text-4xl leading-[1.08] text-ink sm:text-5xl lg:text-6xl">
               {craft.hero.title}
@@ -207,14 +207,14 @@ export function CraftPageTemplate({ craft }: { craft: Craft }) {
         </Container>
       </section>
 
-      {/* Điều hướng sang các ải khác */}
+      {/* Điều hướng sang các nghề khác */}
       <section className="border-t border-line bg-paper-2/40 py-20 sm:py-24">
         <Container>
           <Reveal>
             <SectionHeading
               eyebrow="Tiếp tục hành trình"
-              title="Khám phá những ải khác"
-              description="Mỗi nghề là một câu chuyện. Chọn một cánh cổng tiếp theo để đi tiếp."
+              title="Lật sang chương tiếp theo"
+              description="Mỗi nghề là một câu chuyện riêng. Khép lại chương này, hãy bước sang một nghề khác của làng."
             />
           </Reveal>
           <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-3">
@@ -229,7 +229,7 @@ export function CraftPageTemplate({ craft }: { craft: Craft }) {
                     className="text-[0.7rem] uppercase tracking-[0.2em]"
                     style={{ color: c.accent }}
                   >
-                    Ải {c.order}
+                    Chương {c.order}
                   </p>
                   <h3 className="mt-1 font-display text-xl text-ink">{c.name}</h3>
                 </div>

@@ -99,6 +99,18 @@ a {
   letter-spacing: -0.01em;
 }
 
+/* Mép giấy răng cưa (zigzag) cho đáy header — kiểu giấy xé */
+.zigzag-edge {
+  height: 13px;
+  background-color: var(--color-paper);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='13'%3E%3Cpath d='M0 0 H22 L11 13 Z' fill='%23000'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='13'%3E%3Cpath d='M0 0 H22 L11 13 Z' fill='%23000'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: 22px 13px;
+  mask-size: 22px 13px;
+}
+
 /* Chip nhãn nhỏ kiểu con dấu */
 .eyebrow {
   font-family: var(--font-sans);

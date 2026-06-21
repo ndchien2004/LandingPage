@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { crafts } from "@/data/crafts";
-import {
-  projectIntro,
-  projectReasons,
-  projectGoals,
-  projectPhases,
-} from "@/data/projects";
+import { ProjectCard } from "@/components/ui/ProjectCard";
+import { Button } from "@/components/ui/Button";
+import { projectIntro, projectPhases, portfolio } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Dự án",
@@ -22,78 +17,33 @@ export default function DuAnPage() {
   return (
     <SiteShell>
       <PageHero
-        eyebrow="Dự án"
-        title={projectIntro.title}
+        breadcrumb={[
+          { label: "Trang chủ", href: "/" },
+          { label: "Dự án" },
+        ]}
+        eyebrow="Dự án Gió Từ Làng"
+        title="Dự án"
         subtitle={projectIntro.lead}
       />
 
-      {/* Giới thiệu dự án */}
-      <section className="py-20 sm:py-24">
-        <Container size="narrow">
-          <Reveal stagger>
-            <SectionHeading eyebrow="Hành trình" title="Vì sao có Gió Từ Làng" />
-            <div className="mt-6 space-y-5 text-base leading-8 text-ink-soft">
-              {projectIntro.paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* Lý do thực hiện */}
-      <section className="border-y border-line bg-paper-2/40 py-20 sm:py-24">
+      {/* Lưới dự án / chuyên đề — layout chính, giống trang dự án tham chiếu */}
+      <section className="py-16 sm:py-20">
         <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="Lý do"
-              title="Ba điều thôi thúc chúng tôi bắt đầu"
-            />
-          </Reveal>
-          <Reveal stagger className="mt-12 grid gap-6 md:grid-cols-3">
-            {projectReasons.map((r, i) => (
-              <div
-                key={i}
-                className="rounded-2xl border border-line bg-white/70 p-7"
-              >
-                <span className="font-display text-3xl text-son">0{i + 1}</span>
-                <h3 className="mt-4 font-display text-xl text-ink">{r.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-muted">
-                  {r.description}
-                </p>
-              </div>
+          <Reveal stagger className="grid gap-7 md:grid-cols-2">
+            {portfolio.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </Reveal>
         </Container>
       </section>
 
-      {/* Mục tiêu */}
-      <section className="py-20 sm:py-24">
-        <Container className="grid gap-12 lg:grid-cols-2">
-          <Reveal>
-            <SectionHeading eyebrow="Mục tiêu" title="Điều dự án hướng tới" />
-          </Reveal>
-          <Reveal stagger as="ul" className="space-y-4">
-            {projectGoals.map((goal, i) => (
-              <li
-                key={i}
-                className="flex gap-4 rounded-xl border border-line bg-white/70 p-5"
-              >
-                <span className="font-display text-lg text-son">↳</span>
-                <span className="text-base leading-7 text-ink-soft">{goal}</span>
-              </li>
-            ))}
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* Cấu trúc nội dung / giai đoạn */}
-      <section className="border-y border-line bg-paper-2/40 py-20 sm:py-24">
+      {/* Hành trình dự án — giữ mạch kể chuyện */}
+      <section className="border-t border-line bg-paper-2/40 py-20 sm:py-24">
         <Container>
           <Reveal>
             <SectionHeading
-              eyebrow="Cấu trúc"
-              title="Bốn bước của hành trình"
+              eyebrow="Hành trình"
+              title="Cách câu chuyện được kể"
               description="Từ lắng nghe đến lan tỏa, mỗi bước đưa câu chuyện làng nghề tiến gần hơn tới công chúng."
             />
           </Reveal>
@@ -118,36 +68,23 @@ export default function DuAnPage() {
         </Container>
       </section>
 
-      {/* Nhánh khám phá */}
+      {/* CTA */}
       <section className="py-20 sm:py-24">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="Bốn nhánh khám phá"
-              title="Dự án chính & các nhánh nghề"
-              description="Nghề quạt là hướng đi trọng tâm, mở rộng sang mộc, sơn và tre."
-            />
-          </Reveal>
-          <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {crafts.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/${c.slug}`}
-                className="group rounded-2xl border border-line bg-white/70 p-6 transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
-              >
-                <p
-                  className="text-[0.7rem] uppercase tracking-[0.2em]"
-                  style={{ color: c.accent }}
-                >
-                  Ải {c.order}
-                </p>
-                <h3 className="mt-2 font-display text-xl text-ink">{c.name}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{c.kicker}</p>
-                <span className="mt-4 inline-block text-sm text-ink-soft transition group-hover:text-son">
-                  Khám phá →
-                </span>
-              </Link>
-            ))}
+        <Container className="text-center">
+          <Reveal stagger>
+            <h2 className="mx-auto max-w-2xl font-display text-3xl leading-tight text-ink sm:text-4xl">
+              Cùng giữ lấy một di sản đang sống
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-muted">
+              Mỗi lượt ghé thăm, mỗi câu chuyện được kể lại đều góp phần để làng
+              nghề Chàng Sơn tiếp tục thở.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Button href="/san-pham">Xem sản phẩm</Button>
+              <Button href="/lien-he" variant="outline">
+                Liên hệ với chúng tôi
+              </Button>
+            </div>
           </Reveal>
         </Container>
       </section>

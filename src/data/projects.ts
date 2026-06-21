@@ -4,6 +4,100 @@ export type ProjectPhase = {
   description: string;
 };
 
+export type ProjectItem = {
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  href: string;
+  accent: string;
+  image: string;
+};
+
+/** Danh mục dự án / chuyên đề — hiển thị dạng lưới giống trang dự án quattutam.vn. */
+export const portfolio: ProjectItem[] = [
+  {
+    slug: "lang-quat-chang-son",
+    title: "Làng Quạt Chàng Sơn",
+    category: "Nghề Quạt",
+    description:
+      "Chuyên đề trọng tâm của dự án — hành trình gìn giữ và lan tỏa nghề quạt truyền thống của làng.",
+    href: "/nghe-quat",
+    accent: "#b23a2e",
+    image: "/images/projects/lang-quat.jpg",
+  },
+  {
+    slug: "quat-nghe-thuat-treo-tuong",
+    title: "Quạt nghệ thuật treo tường",
+    category: "Nghề Quạt",
+    description:
+      "Đưa cánh quạt vẽ tay trở thành điểm nhấn trang trí cho không gian sống hiện đại.",
+    href: "/san-pham",
+    accent: "#b23a2e",
+    image: "/images/projects/quat-treo-tuong.jpg",
+  },
+  {
+    slug: "quat-su-kien-qua-tang",
+    title: "Quạt sự kiện & quà tặng văn hóa",
+    category: "Nghề Quạt",
+    description:
+      "Những chiếc quạt mang câu chuyện làng nghề đến các sự kiện, hội chợ và bộ quà tặng.",
+    href: "/san-pham",
+    accent: "#b23a2e",
+    image: "/images/projects/quat-su-kien.jpg",
+  },
+  {
+    slug: "khong-gian-nha-go",
+    title: "Không gian nhà gỗ truyền thống",
+    category: "Nghề Mộc",
+    description:
+      "Tư liệu về kết cấu, hoa văn và bàn tay người thợ mộc trong kiến trúc gỗ Chàng Sơn.",
+    href: "/nghe-moc",
+    accent: "#7a3b2e",
+    image: "/images/projects/nha-go.jpg",
+  },
+  {
+    slug: "do-tho-hoanh-phi",
+    title: "Đồ thờ, hoành phi & câu đối",
+    category: "Nghề Mộc",
+    description:
+      "Ghi lại nét chạm khắc tinh xảo trên các tác phẩm gỗ tâm linh của làng.",
+    href: "/nghe-moc",
+    accent: "#7a3b2e",
+    image: "/images/projects/do-tho.jpg",
+  },
+  {
+    slug: "son-ta-thu-cong",
+    title: "Sơn ta trên đồ thủ công",
+    category: "Nghề Sơn",
+    description:
+      "Khám phá chiều sâu của sơn truyền thống qua từng lớp ủ, lớp mài kiên nhẫn.",
+    href: "/nghe-son",
+    accent: "#c2703d",
+    image: "/images/projects/son-ta.jpg",
+  },
+  {
+    slug: "tre-doi-song-hien-dai",
+    title: "Tre trong đời sống hiện đại",
+    category: "Nghề Tre",
+    description:
+      "Thiết kế mới trên vật liệu tre truyền thống, hướng tới lối sống xanh và bền vững.",
+    href: "/nghe-tre",
+    accent: "#6f7a3b",
+    image: "/images/projects/tre-hien-dai.jpg",
+  },
+  {
+    slug: "tu-lieu-cau-chuyen-lang-nghe",
+    title: "Tư liệu & câu chuyện làng nghề",
+    category: "Chuyên đề",
+    description:
+      "Phóng sự, hình ảnh và lời kể của những người đang ngày ngày giữ nghề ở Chàng Sơn.",
+    href: "/tin-tuc",
+    accent: "#b23a2e",
+    image: "/images/projects/tu-lieu.jpg",
+  },
+];
+
 export const projectIntro = {
   title: "Gió Từ Làng",
   lead: "Một dự án quảng bá làng nghề Chàng Sơn bằng ngôn ngữ của câu chuyện, hình ảnh và trải nghiệm.",
@@ -55,7 +149,7 @@ export const projectPhases: ProjectPhase[] = [
     phase: "03",
     title: "Mở ra hành trình",
     description:
-      "Thiết kế homepage như một sân khấu chọn ải, đưa người xem bước vào từng nghề một cách tự nhiên.",
+      "Thiết kế homepage như trang mở của một cuốn truyện, dẫn người xem bước vào từng nghề một cách tự nhiên.",
   },
   {
     phase: "04",
