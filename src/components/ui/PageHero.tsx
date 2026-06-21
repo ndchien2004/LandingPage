@@ -1,0 +1,55 @@
+import { Container } from "./Container";
+import { Reveal } from "./Reveal";
+import { cn } from "@/lib/utils";
+
+type PageHeroProps = {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  accent?: string;
+  align?: "left" | "center";
+  children?: React.ReactNode;
+};
+
+/** Hero nhỏ, nhã nhặn dùng cho các trang nội dung (không phải homepage). */
+export function PageHero({
+  eyebrow,
+  title,
+  subtitle,
+  accent = "#b23a2e",
+  align = "left",
+  children,
+}: PageHeroProps) {
+  return (
+    <section className="relative overflow-hidden border-b border-line bg-paper-grain">
+      {/* Vệt màu nhấn mềm */}
+      <div
+        className="pointer-events-none absolute -top-32 right-[-10%] h-[28rem] w-[28rem] rounded-full blur-3xl"
+        style={{ background: `${accent}1f` }}
+      />
+      <Container className="relative py-20 sm:py-28">
+        <Reveal stagger className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
+          {eyebrow && (
+            <p className="eyebrow mb-4" style={{ color: accent }}>
+              {eyebrow}
+            </p>
+          )}
+          <h1 className="font-display text-4xl leading-[1.08] text-ink sm:text-5xl lg:text-6xl">
+            {title}
+          </h1>
+          {subtitle && (
+            <p
+              className={cn(
+                "mt-6 text-lg leading-8 text-muted",
+                align === "center" && "mx-auto",
+              )}
+            >
+              {subtitle}
+            </p>
+          )}
+          {children && <div className="mt-8">{children}</div>}
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
