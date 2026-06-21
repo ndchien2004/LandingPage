@@ -14,6 +14,7 @@ export default function SanPhamPage() {
   return (
     <SiteShell>
       <PageHero
+        breadcrumb={[{ label: "Trang chủ", href: "/" }, { label: "Sản phẩm" }]}
         eyebrow="Sản phẩm"
         title="Tinh hoa thủ công Chàng Sơn"
         subtitle="Mỗi sản phẩm là kết tinh của nguyên liệu, kỹ thuật và bàn tay người thợ. Khám phá bộ sưu tập theo từng nhóm nghề."

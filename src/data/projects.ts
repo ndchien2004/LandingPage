@@ -14,6 +14,78 @@ export type ProjectItem = {
   image: string;
 };
 
+export type ContentWeek = {
+  week: string;
+  theme: string;
+  items: string[];
+};
+
+/** Lộ trình nội dung theo tuần (bám sơ đồ dự án trên Figma). */
+export const contentRoadmap: ContentWeek[] = [
+  {
+    week: "Tuần 5",
+    theme: "Đặt nền & bối cảnh",
+    items: [
+      "Khám phá làng nghề truyền thống Chàng Sơn",
+      "Làng nghề mộc cổ truyền Chàng Sơn",
+      "Quạt cổ Việt Nam – di sản đang bị nhầm lẫn",
+    ],
+  },
+  {
+    week: "Tuần 6",
+    theme: "Đi sâu vào nghề quạt",
+    items: [
+      "Giới thiệu nghề làm quạt cổ",
+      "Chân dung nhân vật",
+      "Quy trình nghề",
+      "Chi tiết thẩm mỹ",
+      "Nỗi trăn trở",
+    ],
+  },
+  {
+    week: "Tuần 7",
+    theme: "Sản phẩm & tiếp nối",
+    items: [
+      "Quạt trong đời sống hôm nay",
+      "Gìn giữ và lan tỏa nghề",
+    ],
+  },
+];
+
+/** Cấu trúc dự án: một nghề chính, ba nghề phụ. */
+export const projectStructure = {
+  main: {
+    name: "Gió Từ Làng — Nghề Quạt",
+    role: "Dự án chính",
+    href: "/nghe-quat",
+    accent: "#b23a2e",
+    note: "Nghề quạt là mạch kể trung tâm, trọng tâm nội dung của toàn dự án.",
+  },
+  branches: [
+    {
+      name: "Nghề Mộc",
+      role: "Nhánh phụ",
+      href: "/nghe-moc",
+      accent: "#7a3b2e",
+      note: "Mở rộng câu chuyện sang nghề mộc cổ truyền của làng.",
+    },
+    {
+      name: "Nghề Sơn",
+      role: "Nhánh phụ",
+      href: "/nghe-son",
+      accent: "#c2703d",
+      note: "Chiều sâu của sơn ta — sự kiên nhẫn qua từng lớp ủ.",
+    },
+    {
+      name: "Nghề Tre",
+      role: "Nhánh phụ",
+      href: "/nghe-tre",
+      accent: "#6f7a3b",
+      note: "Sự dẻo dai, gần gũi của tre trong nếp sống Việt.",
+    },
+  ],
+};
+
 /** Danh mục dự án / chuyên đề — hiển thị dạng lưới giống trang dự án quattutam.vn. */
 export const portfolio: ProjectItem[] = [
   {

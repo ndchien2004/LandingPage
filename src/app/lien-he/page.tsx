@@ -23,6 +23,7 @@ export default function LienHePage() {
   return (
     <SiteShell>
       <PageHero
+        breadcrumb={[{ label: "Trang chủ", href: "/" }, { label: "Liên hệ" }]}
         eyebrow="Liên hệ"
         title="Kết nối cùng Gió Từ Làng"
         subtitle="Bạn quan tâm tới làng nghề Chàng Sơn, muốn tìm hiểu sản phẩm hay đồng hành cùng dự án? Hãy để lại lời nhắn cho chúng tôi."

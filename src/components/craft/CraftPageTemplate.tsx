@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Craft } from "@/data/crafts";
 import { crafts } from "@/data/crafts";
+import { site } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Placeholder } from "@/components/ui/Placeholder";
@@ -64,7 +65,7 @@ export function CraftPageTemplate({ craft }: { craft: Craft }) {
             />
           </Reveal>
           <Reveal stagger>
-            <SectionHeading eyebrow="Về nghề" title={`Câu chuyện ${craft.name.toLowerCase()}`} />
+            <SectionHeading eyebrow="Lịch sử" title={`Câu chuyện ${craft.name.toLowerCase()}`} />
             <div className="mt-6 space-y-5">
               {craft.intro.map((p, i) => (
                 <p key={i} className="text-base leading-8 text-ink-soft">
@@ -113,7 +114,7 @@ export function CraftPageTemplate({ craft }: { craft: Craft }) {
         <Container>
           <Reveal>
             <SectionHeading
-              eyebrow="Quy trình"
+              eyebrow="Phương thức · Công đoạn"
               title="Từ nguyên liệu đến tác phẩm"
               description="Mỗi bước đều đòi hỏi sự tỉ mỉ và bàn tay lành nghề."
             />
@@ -171,8 +172,37 @@ export function CraftPageTemplate({ craft }: { craft: Craft }) {
         </Container>
       </section>
 
-      {/* Sản phẩm tiêu biểu */}
+      {/* Vị trí */}
       <section className="py-20 sm:py-24">
+        <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <Reveal stagger>
+            <SectionHeading eyebrow="Vị trí" title="Nơi nghề được sinh ra" />
+            <p className="mt-6 text-base leading-8 text-ink-soft">
+              {craft.name} gắn bó với làng nghề Chàng Sơn — vùng đất giàu truyền
+              thống thủ công của xứ Đoài. Đây là nơi nghề được hình thành, gìn
+              giữ và tiếp nối qua nhiều thế hệ người thợ.
+            </p>
+            <div className="mt-6 rounded-xl border border-line bg-white/70 p-5">
+              <p className="text-[0.7rem] uppercase tracking-[0.18em] text-muted">
+                Địa chỉ
+              </p>
+              <p className="mt-1.5 font-display text-lg text-ink">
+                {site.address}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal>
+            <Placeholder
+              label="Bản đồ làng Chàng Sơn"
+              accent={craft.accent}
+              className="aspect-[16/11] w-full"
+            />
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* Sản phẩm tiêu biểu */}
+      <section className="border-t border-line py-20 sm:py-24">
         <Container>
           <Reveal>
             <SectionHeading

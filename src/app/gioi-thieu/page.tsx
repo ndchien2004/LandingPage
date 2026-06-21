@@ -34,11 +34,30 @@ const facts = [
   { label: "Tinh thần", value: "Thủ công truyền thống" },
 ];
 
+const history = [
+  {
+    era: "Khởi nguồn",
+    title: "Một làng nghề của xứ Đoài",
+    body: "Chàng Sơn hình thành và phát triển nghề thủ công từ rất sớm, trở thành một trong những làng nghề truyền thống tiêu biểu của vùng xứ Đoài.",
+  },
+  {
+    era: "Hưng thịnh",
+    title: "Tiếng lành vượt lũy tre làng",
+    body: "Quạt, đồ gỗ và các sản phẩm thủ công của làng được biết đến rộng rãi, gắn với đời sống, lễ hội và sinh hoạt của nhiều vùng.",
+  },
+  {
+    era: "Hôm nay",
+    title: "Gìn giữ và tiếp nối",
+    body: "Trước nhịp sống hiện đại, người Chàng Sơn vẫn bền bỉ giữ nghề, đồng thời tìm cách đưa sản phẩm đến gần hơn với công chúng.",
+  },
+];
+
 export default function GioiThieuPage() {
   return (
     <SiteShell>
       <PageHero
-        eyebrow="Giới thiệu"
+        breadcrumb={[{ label: "Trang chủ", href: "/" }, { label: "Giới thiệu" }]}
+        eyebrow="Giới thiệu về làng"
         title="Làng nghề Chàng Sơn"
         subtitle="Một vùng đất nơi nghề thủ công không chỉ là sinh kế, mà là bản sắc, là ký ức và là niềm tự hào được trao truyền qua bao thế hệ."
       />
@@ -76,6 +95,69 @@ export default function GioiThieuPage() {
               accent="#b23a2e"
               className="aspect-[4/5] w-full shadow-[var(--shadow-card)]"
             />
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* Lịch sử */}
+      <section className="border-t border-line bg-paper-2/40 py-20 sm:py-24">
+        <Container>
+          <Reveal>
+            <SectionHeading
+              eyebrow="Lịch sử"
+              title="Dòng chảy của một làng nghề"
+              description="Từ thuở khởi nguồn đến hôm nay, nghề thủ công vẫn là mạch sống không dứt của Chàng Sơn."
+            />
+          </Reveal>
+          <Reveal stagger className="mt-12 grid gap-6 md:grid-cols-3">
+            {history.map((item, i) => (
+              <div
+                key={item.era}
+                className="relative rounded-2xl border border-line bg-white/70 p-7"
+              >
+                <span className="font-display text-3xl text-son">0{i + 1}</span>
+                <p className="mt-3 text-[0.7rem] uppercase tracking-[0.2em] text-dat">
+                  {item.era}
+                </p>
+                <h3 className="mt-1 font-display text-xl text-ink">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
+              </div>
+            ))}
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* Ý nghĩa tên gọi */}
+      <section className="py-20 sm:py-24">
+        <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <Reveal>
+            <Placeholder
+              label="Gió Từ Làng"
+              accent="#c2703d"
+              className="aspect-[4/3] w-full"
+            />
+          </Reveal>
+          <Reveal stagger>
+            <SectionHeading eyebrow="Ý nghĩa tên gọi" title="Vì sao là “Gió Từ Làng”" />
+            <div className="mt-6 space-y-5 text-base leading-8 text-ink-soft">
+              <p>
+                “Gió” là hình ảnh gắn liền với chiếc quạt — sản phẩm tiêu biểu
+                nhất của làng. Gió cũng là thứ vô hình nhưng lan tỏa, như cách
+                câu chuyện làng nghề được truyền đi từ người này sang người khác.
+              </p>
+              <p>
+                “Từ Làng” nhắc tới cội nguồn: mọi giá trị đều bắt đầu từ làng
+                nghề Chàng Sơn, từ đôi bàn tay người thợ và nếp sống đã nuôi
+                dưỡng nghề qua bao thế hệ.
+              </p>
+              <p>
+                <span className="font-medium text-ink">Gió Từ Làng</span> vì thế
+                là lời mời gọi: hãy để ngọn gió của làng nghề đưa bạn vào một
+                hành trình khám phá quạt, mộc, sơn và tre.
+              </p>
+            </div>
           </Reveal>
         </Container>
       </section>

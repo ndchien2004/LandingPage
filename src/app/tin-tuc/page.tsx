@@ -18,6 +18,7 @@ export default function TinTucPage() {
   return (
     <SiteShell>
       <PageHero
+        breadcrumb={[{ label: "Trang chủ", href: "/" }, { label: "Tin tức" }]}
         eyebrow="Tin tức & câu chuyện"
         title="Chuyện kể từ làng"
         subtitle="Những câu chuyện về nghề, về người và về vùng đất Chàng Sơn — góp nhặt để cùng nhau giữ lấy một di sản sống."

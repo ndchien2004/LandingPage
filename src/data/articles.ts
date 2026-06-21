@@ -8,65 +8,109 @@ export type Article = {
   image: string;
 };
 
+/**
+ * Bài viết bám theo lộ trình nội dung trong sơ đồ dự án (Tuần 5 → 7).
+ * Mỗi bài là một chủ đề trong hành trình kể chuyện về làng nghề Chàng Sơn.
+ */
 export const articles: Article[] = [
   {
-    slug: "cau-chuyen-chiec-quat-chang-son",
-    title: "Câu chuyện chiếc quạt Chàng Sơn",
+    slug: "kham-pha-lang-nghe-truyen-thong-chang-son",
+    title: "Khám phá làng nghề truyền thống Chàng Sơn",
     excerpt:
-      "Từ nan tre đến cánh quạt bung mở, hành trình của một chiếc quạt là hành trình của cả một làng nghề.",
-    category: "Câu chuyện nghề",
+      "Đặt chân tới Chàng Sơn để cảm nhận một vùng đất nơi nghề thủ công vẫn hòa cùng nhịp sống thường ngày.",
+    category: "Tuần 5 · Bối cảnh",
     date: "12 tháng 6, 2026",
-    readingTime: "5 phút đọc",
-    image: "/images/articles/quat-story.jpg",
+    readingTime: "6 phút đọc",
+    image: "/images/articles/kham-pha-chang-son.jpg",
   },
   {
-    slug: "nguoi-giu-lua-nghe-moc",
-    title: "Người giữ lửa nghề mộc",
+    slug: "lang-nghe-moc-co-truyen-chang-son",
+    title: "Làng nghề mộc cổ truyền Chàng Sơn",
     excerpt:
-      "Gặp gỡ những người thợ mộc Chàng Sơn, lắng nghe câu chuyện về gỗ, về mộng và về sự kiên nhẫn.",
-    category: "Con người",
+      "Bên cạnh nghề quạt, Chàng Sơn còn nổi danh với nghề mộc — nơi gỗ được thổi hồn qua từng đường chạm.",
+    category: "Tuần 5 · Bối cảnh",
+    date: "11 tháng 6, 2026",
+    readingTime: "5 phút đọc",
+    image: "/images/articles/moc-co-truyen.jpg",
+  },
+  {
+    slug: "quat-co-viet-nam-di-san-de-bi-nham-lan",
+    title: "Quạt cổ Việt Nam – di sản đang bị nhầm lẫn",
+    excerpt:
+      "Vì sao nhiều người vẫn nhầm lẫn về quạt cổ Việt Nam? Một góc nhìn để trả lại đúng giá trị cho di sản này.",
+    category: "Tuần 5 · Góc nhìn",
+    date: "10 tháng 6, 2026",
+    readingTime: "7 phút đọc",
+    image: "/images/articles/quat-co-di-san.jpg",
+  },
+  {
+    slug: "gioi-thieu-nghe-lam-quat-co",
+    title: "Giới thiệu nghề làm quạt cổ",
+    excerpt:
+      "Nghề làm quạt cổ ở Chàng Sơn bắt đầu từ đâu, và điều gì làm nên sự khác biệt của một chiếc quạt thủ công?",
+    category: "Tuần 6 · Nghề Quạt",
     date: "5 tháng 6, 2026",
     readingTime: "6 phút đọc",
-    image: "/images/articles/moc-people.jpg",
+    image: "/images/articles/nghe-quat-co.jpg",
   },
   {
-    slug: "chieu-sau-cua-son-ta",
-    title: "Chiều sâu của sơn ta",
+    slug: "chan-dung-nhan-vat",
+    title: "Chân dung người giữ nghề",
     excerpt:
-      "Vì sao nghề sơn lại dạy người ta sự chờ đợi? Một góc nhìn về kỹ thuật và triết lý của nghề sơn truyền thống.",
-    category: "Tư liệu nghề",
-    date: "28 tháng 5, 2026",
-    readingTime: "7 phút đọc",
-    image: "/images/articles/son-depth.jpg",
+      "Gặp gỡ những nghệ nhân đã gắn bó cả đời với nghề quạt — những người lặng lẽ giữ lửa cho làng.",
+    category: "Tuần 6 · Con người",
+    date: "4 tháng 6, 2026",
+    readingTime: "6 phút đọc",
+    image: "/images/articles/chan-dung-nghe-nhan.jpg",
   },
   {
-    slug: "tre-va-loi-song-xanh",
-    title: "Tre và lối sống xanh",
+    slug: "quy-trinh-nghe",
+    title: "Quy trình làm nên một chiếc quạt",
     excerpt:
-      "Khi vật liệu mộc mạc của làng quê gặp gỡ xu hướng sống bền vững của hôm nay.",
-    category: "Góc nhìn",
-    date: "20 tháng 5, 2026",
-    readingTime: "4 phút đọc",
-    image: "/images/articles/tre-green.jpg",
-  },
-  {
-    slug: "chang-son-mot-chieu-lang",
-    title: "Chàng Sơn, một chiều làng",
-    excerpt:
-      "Dạo một vòng quanh làng nghề Chàng Sơn, nơi nhịp sống và nhịp nghề vẫn hòa làm một.",
-    category: "Phóng sự",
-    date: "14 tháng 5, 2026",
-    readingTime: "8 phút đọc",
-    image: "/images/articles/chang-son.jpg",
-  },
-  {
-    slug: "gio-tu-lang-vi-sao",
-    title: "Gió Từ Làng — vì sao chúng tôi bắt đầu",
-    excerpt:
-      "Đôi lời về lý do và mong muốn đứng sau dự án quảng bá làng nghề Chàng Sơn.",
-    category: "Hậu trường",
-    date: "2 tháng 5, 2026",
+      "Từ chọn tre, chẻ nan, phất giấy đến trang trí — hành trình tỉ mỉ phía sau mỗi cánh quạt Chàng Sơn.",
+    category: "Tuần 6 · Quy trình",
+    date: "3 tháng 6, 2026",
     readingTime: "5 phút đọc",
-    image: "/images/articles/behind.jpg",
+    image: "/images/articles/quy-trinh-quat.jpg",
+  },
+  {
+    slug: "chi-tiet-tham-my",
+    title: "Chi tiết thẩm mỹ trên mặt quạt",
+    excerpt:
+      "Thư pháp, tranh dân gian và họa tiết truyền thống — nơi cái đẹp được gửi gắm trên từng nếp giấy.",
+    category: "Tuần 6 · Thẩm mỹ",
+    date: "2 tháng 6, 2026",
+    readingTime: "4 phút đọc",
+    image: "/images/articles/chi-tiet-tham-my.jpg",
+  },
+  {
+    slug: "noi-tran-tro",
+    title: "Nỗi trăn trở của người làm nghề",
+    excerpt:
+      "Giữa dòng chảy hiện đại, người thợ Chàng Sơn đang đối mặt với những trăn trở gì để giữ lấy nghề?",
+    category: "Tuần 6 · Trăn trở",
+    date: "1 tháng 6, 2026",
+    readingTime: "6 phút đọc",
+    image: "/images/articles/noi-tran-tro.jpg",
+  },
+  {
+    slug: "quat-trong-doi-song-hom-nay",
+    title: "Quạt trong đời sống hôm nay",
+    excerpt:
+      "Chiếc quạt truyền thống tìm chỗ đứng mới trong không gian sống, sự kiện và quà tặng văn hóa hiện đại.",
+    category: "Tuần 7 · Tiếp nối",
+    date: "20 tháng 5, 2026",
+    readingTime: "5 phút đọc",
+    image: "/images/articles/quat-hom-nay.jpg",
+  },
+  {
+    slug: "gin-giu-va-lan-toa-nghe",
+    title: "Gìn giữ và lan tỏa nghề",
+    excerpt:
+      "Làm sao để câu chuyện làng nghề tiếp tục được kể? Đôi lời về hành trình gìn giữ và lan tỏa của dự án.",
+    category: "Tuần 7 · Tiếp nối",
+    date: "18 tháng 5, 2026",
+    readingTime: "5 phút đọc",
+    image: "/images/articles/gin-giu-nghe.jpg",
   },
 ];
