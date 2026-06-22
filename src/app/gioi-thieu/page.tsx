@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Placeholder } from "@/components/ui/Placeholder";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { cloudinaryAssets } from "@/data/cloudinaryAssets";
+
+const img = cloudinaryAssets.gioiThieu;
 
 export const metadata: Metadata = {
   title: "Giới thiệu",
@@ -62,6 +65,28 @@ export default function GioiThieuPage() {
         subtitle="Một vùng đất nơi nghề thủ công không chỉ là sinh kế, mà là bản sắc, là ký ức và là niềm tự hào được trao truyền qua bao thế hệ."
       />
 
+      {/* Ảnh chính — thủy đình, dải ảnh lớn tràn viền mở đầu trang */}
+      <section className="relative h-[78vh] min-h-[460px] w-full overflow-hidden">
+        <Image
+          src={img.thuyDinh.src}
+          alt={img.thuyDinh.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,12,6,0.16)_0%,transparent_42%,rgba(20,12,6,0.66)_100%)]" />
+        <Container className="relative z-10 flex h-full items-end pb-10 sm:pb-14">
+          <p className="max-w-lg text-sm leading-6 text-paper/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] sm:text-base sm:leading-7">
+            <span className="font-display text-lg text-paper sm:text-xl">
+              Thủy đình làng Chàng Sơn
+            </span>{" "}
+            — biểu tượng soi bóng trên mặt hồ, nơi hội tụ tín ngưỡng, lễ hội và
+            ký ức bao đời của người làng nghề.
+          </p>
+        </Container>
+      </section>
+
       {/* Tổng quan */}
       <section className="py-20 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
@@ -90,11 +115,15 @@ export default function GioiThieuPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <Placeholder
-              label="Một góc làng Chàng Sơn"
-              accent="#b23a2e"
-              className="aspect-[4/5] w-full shadow-[var(--shadow-card)]"
-            />
+            <div className="relative aspect-[4/5] w-full overflow-hidden shadow-[var(--shadow-card)]">
+              <Image
+                src={img.duongLang.src}
+                alt={img.duongLang.alt}
+                fill
+                sizes="(min-width: 1024px) 42vw, 100vw"
+                className="object-cover"
+              />
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -129,15 +158,70 @@ export default function GioiThieuPage() {
         </Container>
       </section>
 
-      {/* Ý nghĩa tên gọi */}
+      {/* Di sản — ghép ảnh kiến trúc cổ */}
       <section className="py-20 sm:py-24">
+        <Container>
+          <Reveal>
+            <SectionHeading
+              eyebrow="Di sản"
+              title="Dấu tích trăm năm"
+              description="Những nếp nhà, mái đình và đường chạm cổ vẫn lặng lẽ kể câu chuyện về một làng nghề giàu truyền thống."
+            />
+          </Reveal>
+          <Reveal className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[minmax(280px,1fr)]">
+            <figure className="group relative aspect-[4/3] overflow-hidden sm:col-span-2 lg:col-span-7 lg:row-span-2 lg:min-h-[580px] lg:aspect-auto">
+              <Image
+                src={img.nhaCo.src}
+                alt={img.nhaCo.alt}
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(20,12,6,0.78))] p-5 font-display text-lg text-paper">
+                Nếp nhà cổ giữa làng nghề
+              </figcaption>
+            </figure>
+            <figure className="group relative aspect-[3/2] overflow-hidden lg:col-span-5 lg:min-h-[280px] lg:aspect-auto">
+              <Image
+                src={img.vanCoAnhLinh.src}
+                alt={img.vanCoAnhLinh.alt}
+                fill
+                sizes="(min-width: 1024px) 42vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(20,12,6,0.78))] p-5 font-display text-lg text-paper">
+                Đại tự “Vạn Cổ Anh Linh”
+              </figcaption>
+            </figure>
+            <figure className="group relative aspect-[3/2] overflow-hidden lg:col-span-5 lg:min-h-[280px] lg:aspect-auto">
+              <Image
+                src={img.dauDao.src}
+                alt={img.dauDao.alt}
+                fill
+                sizes="(min-width: 1024px) 42vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(20,12,6,0.78))] p-5 font-display text-lg text-paper">
+                Đầu đao chạm khắc tinh xảo
+              </figcaption>
+            </figure>
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* Ý nghĩa tên gọi */}
+      <section className="border-t border-line bg-paper-2/40 py-20 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <Reveal>
-            <Placeholder
-              label="Gió Từ Làng"
-              accent="#c2703d"
-              className="aspect-[4/3] w-full"
-            />
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-[var(--shadow-card)]">
+              <Image
+                src={img.congDinh.src}
+                alt={img.congDinh.alt}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
           </Reveal>
           <Reveal stagger>
             <SectionHeading eyebrow="Ý nghĩa tên gọi" title="Vì sao là “Gió Từ Làng”" />
@@ -163,7 +247,7 @@ export default function GioiThieuPage() {
       </section>
 
       {/* Bản sắc */}
-      <section className="border-y border-line bg-paper-2/40 py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <Container>
           <Reveal>
             <SectionHeading
@@ -187,14 +271,18 @@ export default function GioiThieuPage() {
       </section>
 
       {/* Giá trị văn hóa + thông tin nhanh */}
-      <section className="py-20 sm:py-24">
+      <section className="border-t border-line bg-paper-2/40 py-20 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <Reveal>
-            <Placeholder
-              label="Nghệ nhân làng nghề"
-              accent="#7a3b2e"
-              className="aspect-[5/6] w-full"
-            />
+            <div className="relative aspect-[5/6] w-full overflow-hidden shadow-[var(--shadow-card)]">
+              <Image
+                src={img.nguoiLang.src}
+                alt={img.nguoiLang.alt}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
           </Reveal>
           <Reveal stagger>
             <SectionHeading

@@ -99,16 +99,16 @@ a {
   letter-spacing: -0.01em;
 }
 
-/* Mép giấy răng cưa (zigzag) cho đáy header — kiểu giấy xé */
+/* Mép giấy răng cưa cho đáy header — gai tam giác thưa, góc rộng nhưng vẫn nhọn */
 .zigzag-edge {
-  height: 13px;
+  height: 16px;
   background-color: var(--color-paper);
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='13'%3E%3Cpath d='M0 0 H22 L11 13 Z' fill='%23000'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='13'%3E%3Cpath d='M0 0 H22 L11 13 Z' fill='%23000'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 0 H48 L24 16 Z' fill='%23000'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16'%3E%3Cpath d='M0 0 H48 L24 16 Z' fill='%23000'/%3E%3C/svg%3E");
   -webkit-mask-repeat: repeat-x;
   mask-repeat: repeat-x;
-  -webkit-mask-size: 22px 13px;
-  mask-size: 22px 13px;
+  -webkit-mask-size: 48px 16px;
+  mask-size: 48px 16px;
 }
 
 /* Chip nhãn nhỏ kiểu con dấu */
@@ -154,6 +154,57 @@ a {
   50% {
     transform: rotate(1.2deg);
   }
+}
+
+/* Vòng sáng lan tỏa quanh điểm chọn làng nghề (game marker) */
+@keyframes marker-pulse {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.animate-marker-pulse {
+  animation: marker-pulse 2.8s ease-out infinite;
+}
+
+/* Trôi nhẹ lên xuống cho điểm chọn & chi tiết trang trí */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+.animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+/* Sương / lụa trôi ngang chậm rãi trên bản đồ làng nghề */
+@keyframes mist-drift {
+  0% {
+    transform: translate3d(-4%, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(4%, -2%, 0) scale(1.1);
+  }
+  100% {
+    transform: translate3d(-4%, 0, 0) scale(1.05);
+  }
+}
+
+.animate-mist {
+  animation: mist-drift 26s ease-in-out infinite;
 }
 
 /* Tôn trọng người dùng tắt chuyển động */

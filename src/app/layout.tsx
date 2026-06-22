@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Be_Vietnam_Pro } from "next/font/google";
+import { cloudinaryAssets } from "@/data/cloudinaryAssets";
+import { PageTransitionProvider } from "@/components/transition/PageTransition";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -30,6 +32,20 @@ export const metadata: Metadata = {
     "thủ công Việt Nam",
     "Gió Từ Làng",
   ],
+  openGraph: {
+    images: [
+      {
+        url: cloudinaryAssets.logo.normal.rawSrc,
+        width: 1254,
+        height: 1254,
+        alt: cloudinaryAssets.logo.normal.alt,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [cloudinaryAssets.logo.normal.rawSrc],
+  },
 };
 
 export default function RootLayout({
@@ -39,7 +55,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className={`${playfair.variable} ${beVietnam.variable}`}>
-      <body className="bg-paper font-sans text-ink antialiased">{children}</body>
+      <body className="bg-paper font-sans text-ink antialiased">
+        <PageTransitionProvider>{children}</PageTransitionProvider>
+      </body>
     </html>
   );
 }

@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { TransitionLink } from "@/components/transition/TransitionLink";
+import { cloudinaryAssets } from "@/data/cloudinaryAssets";
 import { mainNav } from "@/data/navigation";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
@@ -50,13 +52,20 @@ export function Header({ variant = "solid" }: HeaderProps) {
       >
         <div className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:h-20 sm:px-8">
           {/* Logo */}
-          <Link
+          <TransitionLink
             href="/"
             className="flex items-center gap-2.5 justify-self-start"
             onClick={() => setOpen(false)}
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-son/40 bg-son/10 text-son">
-              <FanIcon className="h-5 w-5" />
+            <span className="flex items-center">
+              <Image
+                src={cloudinaryAssets.logo.transparent.src}
+                alt=""
+                width={180}
+                height={80}
+                priority
+                className="h-11 w-auto object-contain sm:h-12"
+              />
             </span>
             <span className="flex flex-col leading-none">
               <span className="font-display text-lg tracking-wide text-son">
@@ -66,14 +75,14 @@ export function Header({ variant = "solid" }: HeaderProps) {
                 Làng nghề Chàng Sơn
               </span>
             </span>
-          </Link>
+          </TransitionLink>
 
           {/* Nav giữa (desktop) */}
           <nav className="hidden items-center gap-7 justify-self-center lg:flex">
             {mainNav.map((item) => {
               const active = isActive(item.href);
               return (
-                <Link
+                <TransitionLink
                   key={item.href}
                   href={item.href}
                   className={cn(
@@ -88,7 +97,7 @@ export function Header({ variant = "solid" }: HeaderProps) {
                       active ? "w-full opacity-100" : "w-0 opacity-0",
                     )}
                   />
-                </Link>
+                </TransitionLink>
               );
             })}
           </nav>
@@ -101,13 +110,6 @@ export function Header({ variant = "solid" }: HeaderProps) {
               className="flex h-10 w-10 items-center justify-center rounded-full text-nau transition hover:bg-son/10 hover:text-son"
             >
               <SearchIcon className="h-[1.15rem] w-[1.15rem]" />
-            </button>
-            <button
-              type="button"
-              aria-label="Giỏ hàng"
-              className="flex h-10 w-10 items-center justify-center rounded-full text-nau transition hover:bg-son/10 hover:text-son"
-            >
-              <BagIcon className="h-[1.15rem] w-[1.15rem]" />
             </button>
             <button
               type="button"
@@ -141,7 +143,7 @@ export function Header({ variant = "solid" }: HeaderProps) {
           )}
         >
           {mainNav.map((item) => (
-            <Link
+            <TransitionLink
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
@@ -151,7 +153,7 @@ export function Header({ variant = "solid" }: HeaderProps) {
               )}
             >
               {item.label}
-            </Link>
+            </TransitionLink>
           ))}
         </nav>
       </div>
@@ -161,45 +163,11 @@ export function Header({ variant = "solid" }: HeaderProps) {
 
 /* --- Icons (dùng tiết chế) --- */
 
-function FanIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path
-        d="M12 21V12m0 0L4 7m8 5l8-5M12 12L9 4.5M12 12l3-7.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M4 7c4-3 12-3 16 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 function SearchIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
       <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.6" />
       <path d="m20 20-3.2-3.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function BagIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path
-        d="M6.5 8h11l-.9 11.1A2 2 0 0 1 14.6 21H9.4a2 2 0 0 1-2-1.9L6.5 8Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 8V6.5a3 3 0 0 1 6 0V8"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
     </svg>
   );
 }

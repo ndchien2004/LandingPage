@@ -2,9 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { cloudinaryAssets } from "@/data/cloudinaryAssets";
 import { heroSlides } from "@/data/heroSlides";
 import { cn } from "@/lib/utils";
 
@@ -62,7 +64,6 @@ export function HeroSlider() {
         },
         (ctx) => {
           const items = slide.querySelectorAll("[data-anim]");
-          const bg = slide.querySelector<HTMLElement>("[data-bg]");
 
           if (ctx.conditions?.reduced) {
             gsap.set(items, { autoAlpha: 1, y: 0 });
@@ -81,13 +82,6 @@ export function HeroSlider() {
               delay: 0.25,
             },
           );
-          if (bg) {
-            gsap.fromTo(
-              bg,
-              { scale: 1.16 },
-              { scale: 1, duration: AUTOPLAY_MS / 1000 + 1.4, ease: "none" },
-            );
-          }
         },
       );
 
@@ -103,7 +97,10 @@ export function HeroSlider() {
       aria-label="Giới thiệu làng nghề Chàng Sơn"
       className="relative h-[100svh] min-h-[600px] overflow-hidden bg-ink"
     >
-      {heroSlides.map((slide, i) => (
+      {heroSlides.map((slide, i) => {
+        const isIntro = i === 0;
+
+        return (
         <div
           key={slide.key}
           data-slide={i}
@@ -115,8 +112,20 @@ export function HeroSlider() {
               : "pointer-events-none z-0 opacity-0",
           )}
         >
-          {/* Nền (Ken Burns) */}
-          <div data-bg className="absolute inset-0" style={bgStyle(slide.accent)} />
+          {/* Nền tĩnh (không tự phóng to) */}
+          <div className="absolute inset-0" style={bgStyle(slide.accent)}>
+            <Image
+              src={cloudinaryAssets.banner.main.src}
+              alt=""
+              fill
+              priority={isIntro}
+              sizes="100vw"
+              className={cn(
+                "object-cover",
+                isIntro ? "opacity-95" : "opacity-55 mix-blend-soft-light",
+              )}
+            />
+          </div>
 
           {/* Hoa văn nan + quạt mờ */}
           <div
@@ -126,10 +135,12 @@ export function HeroSlider() {
                 "repeating-linear-gradient(112deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 26px)",
             }}
           />
-          <FanGraphic className="absolute left-1/2 top-[42%] h-[78%] -translate-x-1/2 -translate-y-1/2 opacity-80" />
+          {!isIntro && (
+            <FanGraphic className="absolute left-1/2 top-[42%] h-[78%] -translate-x-1/2 -translate-y-1/2 opacity-80" />
+          )}
 
           {/* Lớp tối tăng tương phản chữ */}
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,12,6,0.35)_0%,rgba(20,12,6,0.15)_42%,rgba(20,12,6,0.55)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,12,6,0.45)_0%,rgba(20,12,6,0.2)_42%,rgba(20,12,6,0.68)_100%)]" />
 
           {/* Nội dung */}
           <div className="relative z-10 mx-auto flex h-full max-w-4xl items-center justify-center px-6 text-center">
@@ -163,7 +174,8 @@ export function HeroSlider() {
             </div>
           </div>
         </div>
-      ))}
+        );
+      })}
 
       {/* Nút điều hướng trái / phải — wedge tam giác dán sát mép màn hình */}
       <button

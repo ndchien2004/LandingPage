@@ -1,11 +1,11 @@
 import { Header } from "@/components/layout/Header";
-import { HeroSlider } from "@/components/home/HeroSlider";
+import { MapHero } from "@/components/home/MapHero";
 
 export default function Home() {
   return (
     <>
-      <Header variant="solid" />
-      <HeroSlider />
+      <Header variant="overlay" />
+      <MapHero />
     </>
   );
 }

@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import { cloudinaryAssets } from "@/data/cloudinaryAssets";
 import { footerNav } from "@/data/navigation";
 import { site } from "@/data/site";
 
@@ -10,7 +12,13 @@ export function Footer() {
           {/* Brand */}
           <div className="max-w-sm">
             <Link href="/" className="flex items-center gap-2">
-              <span className="font-display text-2xl text-ink">{site.name}</span>
+              <Image
+                src={cloudinaryAssets.logo.normal.src}
+                alt={site.name}
+                width={260}
+                height={260}
+                className="h-auto w-32 object-contain"
+              />
             </Link>
             <p className="mt-4 text-sm leading-7 text-muted">{site.shortDesc}</p>
             <div className="mt-6 flex flex-wrap gap-2">
