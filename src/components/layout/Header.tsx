@@ -54,20 +54,20 @@ export function Header({ variant = "solid" }: HeaderProps) {
           {/* Logo */}
           <TransitionLink
             href="/"
-            className="flex items-center gap-2.5 justify-self-start"
+            className="flex min-w-0 items-center gap-2.5 justify-self-start"
             onClick={() => setOpen(false)}
           >
-            <span className="flex items-center">
+            <span className="flex shrink-0 items-center">
               <Image
                 src={cloudinaryAssets.logo.transparent.src}
-                alt=""
+                alt={site.name}
                 width={180}
                 height={80}
                 priority
-                className="h-11 w-auto object-contain sm:h-12"
+                className="h-10 w-auto object-contain sm:h-12"
               />
             </span>
-            <span className="flex flex-col leading-none">
+            <span className="hidden min-w-0 flex-col leading-none sm:flex">
               <span className="font-display text-lg tracking-wide text-son">
                 {site.name}
               </span>
@@ -78,7 +78,7 @@ export function Header({ variant = "solid" }: HeaderProps) {
           </TransitionLink>
 
           {/* Nav giữa (desktop) */}
-          <nav className="hidden items-center gap-7 justify-self-center lg:flex">
+          <nav className="col-start-2 hidden items-center gap-7 justify-self-center lg:flex">
             {mainNav.map((item) => {
               const active = isActive(item.href);
               return (
@@ -86,7 +86,7 @@ export function Header({ variant = "solid" }: HeaderProps) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative font-display text-[0.82rem] uppercase tracking-[0.16em] transition-colors duration-300",
+                    "group relative font-display text-[0.82rem] uppercase tracking-[0.16em] transition-colors duration-300",
                     active ? "text-son" : "text-nau hover:text-son",
                   )}
                 >
@@ -94,7 +94,9 @@ export function Header({ variant = "solid" }: HeaderProps) {
                   <span
                     className={cn(
                       "absolute -bottom-2 left-0 h-[2px] rounded-full bg-gradient-to-r from-son to-dat transition-all duration-300",
-                      active ? "w-full opacity-100" : "w-0 opacity-0",
+                      active
+                        ? "w-full opacity-100"
+                        : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100 group-focus-visible:w-full group-focus-visible:opacity-100",
                     )}
                   />
                 </TransitionLink>
@@ -102,8 +104,9 @@ export function Header({ variant = "solid" }: HeaderProps) {
             })}
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center gap-1.5 justify-self-end sm:gap-2">
+          {/* Actions — ghim cột cuối để luôn sát phải (nav giữa display:none trên
+              mobile sẽ bị loại khỏi lưới, nếu không ghim sẽ dồn vào giữa) */}
+          <div className="col-start-3 flex items-center gap-1.5 justify-self-end sm:gap-2">
             <button
               type="button"
               aria-label="Tìm kiếm"

@@ -40,24 +40,51 @@ const ZONES: { slug: string; cx: number; cy: number; d: number }[] = [
   { slug: "nghe-moc", cx: 23.9, cy: 33, d: 13 }, // Làng nghề Mộc (trái – trên)
   { slug: "nghe-son", cx: 21.9, cy: 72.0, d: 11.5 }, // Làng nghề Sơn (trái – dưới)
   { slug: "nghe-quat", cx: 50.1, cy: 53.2, d: 15 }, // Làng nghề Quạt (vòng vàng giữa)
-  { slug: "nghe-tre", cx: 76.6, cy: 35.0, d: 13.5 }, // Làng nghề Tre (phải)
+  { slug: "nghe-tre", cx: 76.6, cy: 35.0, d: 13 }, // Làng nghề Tre (phải)
 ];
 
 const zones = ZONES.map((z) => ({ ...z, craft: getCraft(z.slug) })).filter(
   (z) => z.craft,
 );
 
+/**
+ * Bản đồ phiên bản DỌC cho điện thoại (ảnh 1429×2561 → RATIO ngang/dọc ≈ 0.558).
+ * Emblem trên ảnh này là hình TRÒN (không bị kéo dọc như bản desktop) nên vòng
+ * highlight để tỉ lệ 1:1.
+ *  - cx, cy: tâm emblem theo % chiều rộng/chiều cao khung ảnh.
+ *  - d: đường kính theo % CHIỀU RỘNG khung ảnh.
+ * 👉 Toạ độ dưới đây là ƯỚC LƯỢNG ban đầu — căn tay lại cho khớp vòng tròn.
+ */
+const BANNER_MOBILE_SRC = cloudinaryAssets.map.bannerMobile.src;
+
+const ZONES_MOBILE: { slug: string; cx: number; cy: number; d: number }[] = [
+  { slug: "nghe-quat", cx: 32, cy: 21, d: 40 }, // Quạt (vòng vàng, trên cùng)
+  { slug: "nghe-moc", cx: 73, cy: 46, d: 32 }, // Mộc (phải – giữa)
+  { slug: "nghe-son", cx: 33, cy: 62, d: 32 }, // Sơn (trái – dưới)
+  { slug: "nghe-tre", cx: 66, cy: 85, d: 32 }, // Tre (dưới cùng)
+];
+
+const zonesMobile = ZONES_MOBILE.map((z) => ({
+  ...z,
+  craft: getCraft(z.slug),
+})).filter((z) => z.craft);
+
 export function MapHero() {
   const root = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const mobileFrameRef = useRef<HTMLDivElement>(null);
   const navigate = usePageTransition();
 
   useGSAP(
     () => {
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduce) return;
-      // Fade-in nhẹ (chỉ opacity → các nút luôn nhận click)
-      gsap.from(frameRef.current, { opacity: 0, duration: 1, ease: "power2.out" });
+      // Fade-in nhẹ (chỉ opacity → các nút luôn nhận click). Áp cho cả 2 bản.
+      gsap.from([frameRef.current, mobileFrameRef.current], {
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+      });
     },
     { scope: root },
   );
@@ -68,7 +95,16 @@ export function MapHero() {
       aria-label="Bản đồ làng nghề Chàng Sơn — chọn một làng nghề để khám phá"
       className="relative h-[100svh] min-h-[480px] w-full overflow-hidden bg-ink"
     >
-      {/* Nền mờ lấp đầy phần dư (không để hở viền) */}
+      {/* Nền mờ lấp đầy phần dư (không để hở viền) — đổi ảnh theo breakpoint */}
+      <Image
+        src={BANNER_MOBILE_SRC}
+        alt=""
+        aria-hidden
+        fill
+        priority
+        sizes="100vw"
+        className="scale-110 select-none object-cover blur-2xl sm:hidden"
+      />
       <Image
         src={BANNER_SRC}
         alt=""
@@ -76,11 +112,36 @@ export function MapHero() {
         fill
         priority
         sizes="100vw"
-        className="scale-110 select-none object-cover blur-2xl"
+        className="hidden scale-110 select-none object-cover blur-2xl sm:block"
       />
 
-      {/* Banner sắc nét: full chiều ngang, cắt mép giấy thừa phía trên cho sát navbar */}
-      <div className="absolute inset-x-0 top-16 sm:top-20">
+      {/* === MOBILE (bản dọc): lấp đầy cả rộng & cao (ép ngang vừa khung, kéo dọc cho
+           đầy) → lộ khung tre 2 bên; object-fill nên ảnh phủ khít, vòng không lệch === */}
+      <div className="absolute inset-x-0 bottom-0 top-16 overflow-hidden sm:hidden">
+        <div ref={mobileFrameRef} className="relative h-full w-full">
+          <Image
+            src={BANNER_MOBILE_SRC}
+            alt="Bản đồ di sản làng nghề Chàng Sơn"
+            fill
+            priority
+            sizes="100vw"
+            className="select-none object-fill"
+          />
+          {zonesMobile.map((z) => (
+            <MapZone
+              key={z.slug}
+              cx={z.cx}
+              cy={z.cy}
+              d={z.d}
+              name={z.craft!.name}
+              onSelect={() => navigate(`/${z.slug}`)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* === DESKTOP/TABLET (bản ngang): full chiều ngang, cắt mép giấy thừa trên === */}
+      <div className="absolute inset-x-0 top-20 hidden sm:block">
         {/* Khung cắt: ẩn dải giấy thừa ở mép trên ảnh */}
         <div
           className="relative w-full overflow-hidden"
@@ -111,6 +172,7 @@ export function MapHero() {
                 cx={z.cx}
                 cy={z.cy}
                 d={z.d}
+                ratio={1 / (1 + STRETCH)}
                 name={z.craft!.name}
                 onSelect={() => navigate(`/${z.slug}`)}
               />
@@ -126,11 +188,13 @@ type MapZoneProps = {
   cx: number;
   cy: number;
   d: number;
+  /** Tỉ lệ ngang/dọc của vòng highlight (1 = tròn). Desktop bù STRETCH nên < 1. */
+  ratio?: number;
   name: string;
   onSelect: () => void;
 };
 
-function MapZone({ cx, cy, d, name, onSelect }: MapZoneProps) {
+function MapZone({ cx, cy, d, ratio = 1, name, onSelect }: MapZoneProps) {
   return (
     <button
       type="button"
@@ -141,8 +205,7 @@ function MapZone({ cx, cy, d, name, onSelect }: MapZoneProps) {
         left: `${cx}%`,
         top: `${cy}%`,
         width: `${d}%`,
-        // Bù phần kéo dọc (STRETCH): emblem hiển thị cao hơn nên vòng cũng elip theo
-        aspectRatio: String(1 / (1 + STRETCH)),
+        aspectRatio: String(ratio),
       }}
       className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full outline-none"
     >

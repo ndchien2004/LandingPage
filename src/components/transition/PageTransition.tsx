@@ -8,8 +8,10 @@ import {
   useRef,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { site } from "@/data/site";
+import { cloudinaryAssets } from "@/data/cloudinaryAssets";
 
 type TransitionFn = (href: string) => void;
 
@@ -162,14 +164,21 @@ export function PageTransitionProvider({
             style={{ transform: "scaleX(-1)" }}
           />
 
-          {/* Dấu nhận diện mờ, lướt cùng con sóng */}
+          {/* Dấu nhận diện mờ, lướt cùng con sóng — dùng đúng logo trên navbar */}
           <div
             ref={innerRef}
-            className="absolute inset-y-0 flex flex-col items-center justify-center gap-3"
+            className="absolute inset-y-0 flex flex-col items-center justify-center gap-4"
             style={{ left: WAVE_W, right: WAVE_W }}
           >
-            <FanMark className="h-14 w-14 text-son/80" />
-            <p className="font-display text-xl tracking-wide text-son">
+            <Image
+              src={cloudinaryAssets.logo.transparent.src}
+              alt={site.name}
+              width={320}
+              height={140}
+              priority
+              className="h-24 w-auto object-contain sm:h-28"
+            />
+            <p className="font-display text-2xl tracking-wide text-son">
               {site.name}
             </p>
           </div>
@@ -196,40 +205,6 @@ function WaveEdge({
       aria-hidden="true"
     >
       <path d={WAVE_D} />
-    </svg>
-  );
-}
-
-/** Nan quạt cách điệu — dấu nhận diện hiện trong lúc chuyển màn. */
-function FanMark({ className }: { className?: string }) {
-  const blades = Array.from({ length: 13 });
-  const cx = 100;
-  const cy = 150;
-  const r = 120;
-  return (
-    <svg viewBox="0 0 200 160" fill="none" className={className} aria-hidden="true">
-      <g stroke="currentColor" strokeOpacity="0.85" strokeWidth="2">
-        {blades.map((_, i) => {
-          const deg = 200 + (i * 140) / (blades.length - 1);
-          const a = (deg * Math.PI) / 180;
-          return (
-            <line
-              key={i}
-              x1={cx}
-              y1={cy}
-              x2={cx + r * Math.cos(a)}
-              y2={cy + r * Math.sin(a)}
-            />
-          );
-        })}
-      </g>
-      <path
-        d="M28 70 A 92 92 0 0 1 172 70"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        fill="none"
-      />
-      <circle cx={cx} cy={cy} r="5" fill="currentColor" />
     </svg>
   );
 }

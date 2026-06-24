@@ -32,6 +32,12 @@ export const cloudinaryAssets = {
       rawSrc: imageUrl("map/banner-di-san.jpg"),
       alt: "Bản đồ di sản làng nghề Chàng Sơn",
     },
+    // Bản dọc dùng cho điện thoại (1429×2561).
+    bannerMobile: {
+      src: imageUrl("map/banner-di-san-mobile.jpg", "f_auto,q_auto,w_1429"),
+      rawSrc: imageUrl("map/banner-di-san-mobile.jpg"),
+      alt: "Bản đồ di sản làng nghề Chàng Sơn (bản dọc cho điện thoại)",
+    },
   },
   logo: {
     transparent: {
