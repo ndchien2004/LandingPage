@@ -25,6 +25,14 @@ export const cloudinaryAssets = {
       alt: "Gio Tu Lang landing page banner",
     },
   },
+  // Bản đồ làng nghề dùng cho MapHero (lưu trên Cloudinary, không nằm trong repo).
+  map: {
+    banner: {
+      src: imageUrl("map/banner-di-san.jpg", "f_auto,q_auto,w_2560"),
+      rawSrc: imageUrl("map/banner-di-san.jpg"),
+      alt: "Bản đồ di sản làng nghề Chàng Sơn",
+    },
+  },
   logo: {
     transparent: {
       src: imageUrl("logo/logo-transparent.png", "e_trim:10,c_fit,w_320,h_140"),

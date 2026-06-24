@@ -124,9 +124,6 @@ export function Header({ variant = "solid" }: HeaderProps) {
         </div>
       </div>
 
-      {/* Mép giấy răng cưa */}
-      <div className="zigzag-edge" aria-hidden="true" />
-
       {/* Drawer mobile */}
       <div className={cn("lg:hidden", open ? "pointer-events-auto" : "pointer-events-none")}>
         <div

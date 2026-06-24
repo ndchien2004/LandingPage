@@ -24,6 +24,9 @@
 
   --shadow-soft: 0 18px 40px -24px rgba(60, 38, 18, 0.45);
   --shadow-card: 0 24px 60px -28px rgba(60, 38, 18, 0.55);
+
+  /* Sóng sáng lan quanh điểm làng nghề khi hover (dùng được với group-hover/focus) */
+  --animate-zone-ping: zone-ping 1.9s ease-out infinite;
 }
 
 :root {
@@ -173,6 +176,21 @@ a {
 
 .animate-marker-pulse {
   animation: marker-pulse 2.8s ease-out infinite;
+}
+
+/* Sóng sáng lan nhẹ ra ngoài khi hover điểm làng nghề (giữ biên độ nhỏ để không chạm emblem kế bên) */
+@keyframes zone-ping {
+  0% {
+    transform: scale(0.98);
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
 }
 
 /* Trôi nhẹ lên xuống cho điểm chọn & chi tiết trang trí */
