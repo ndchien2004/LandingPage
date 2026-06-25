@@ -50,7 +50,7 @@ export function Header({ variant = "solid" }: HeaderProps) {
             : "shadow-[0_6px_20px_-18px_rgba(60,38,18,0.4)]",
         )}
       >
-        <div className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:h-20 sm:px-8">
+        <div className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:px-8">
           {/* Logo */}
           <TransitionLink
             href="/"
@@ -131,14 +131,14 @@ export function Header({ variant = "solid" }: HeaderProps) {
       <div className={cn("lg:hidden", open ? "pointer-events-auto" : "pointer-events-none")}>
         <div
           className={cn(
-            "fixed inset-0 top-16 bg-ink/30 transition-opacity duration-300 sm:top-20",
+            "fixed inset-0 top-16 bg-ink/30 transition-opacity duration-300",
             open ? "opacity-100" : "opacity-0",
           )}
           onClick={() => setOpen(false)}
         />
         <nav
           className={cn(
-            "fixed inset-x-0 top-16 origin-top bg-paper px-5 pb-8 pt-2 shadow-[0_18px_40px_-24px_rgba(60,38,18,0.5)] transition duration-300 sm:top-20 sm:px-8",
+            "fixed inset-x-0 top-16 origin-top bg-paper px-5 pb-8 pt-2 shadow-[0_18px_40px_-24px_rgba(60,38,18,0.5)] transition duration-300 sm:px-8",
             open ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0",
           )}
         >

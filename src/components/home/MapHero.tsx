@@ -14,9 +14,13 @@ gsap.registerPlugin(useGSAP);
  *
  * Ảnh bản đồ và các vùng click (hotspot) nằm trong CÙNG một <svg viewBox>. viewBox =
  * đúng kích thước pixel của ảnh gốc, nên toạ độ hotspot được khai báo trong chính hệ toạ
- * độ của ảnh. `preserveAspectRatio="...slice"` (cover) scale ảnh VÀ hotspot bằng cùng một
- * phép biến đổi → chúng không bao giờ trôi khỏi nhau, trên mọi kích thước màn hình, mà vẫn
- * phủ kín khung (không hở dải nền trên/dưới). Không còn object-fill, STRETCH, CROP_TOP.
+ * độ của ảnh. Dù dùng `slice` (cover/crop) hay `none` (kéo khít), browser áp CÙNG một phép
+ * biến đổi cho ảnh VÀ hotspot → chúng KHÔNG BAO GIỜ trôi khỏi nhau, trên mọi kích thước
+ * màn hình / độ phân giải. (Toạ độ ring khai trong hệ pixel của ảnh nên là bất biến.)
+ *
+ * Desktop dùng `none`: ép ảnh khít cả chiều rộng LẪN chiều cao của khung → hiện TRỌN tấm
+ * bản đồ (kể cả mép/khung dưới), không bị tràn xuống ngoài màn. Đánh đổi: ảnh hơi nén dọc
+ * (emblem thành elip nhẹ) — nhưng ring cũng nén y hệt nên vẫn ôm đúng từng làng nghề.
  *
  * 👉 Khi đổi ảnh: cập nhật src trong cloudinaryAssets + đổi VB_* cho khớp pixel ảnh mới.
  */
@@ -24,28 +28,32 @@ const BANNER_SRC = cloudinaryAssets.map.banner.src;
 const BANNER_MOBILE_SRC = cloudinaryAssets.map.bannerMobile.src;
 
 /** Kích thước pixel ảnh gốc = viewBox. Desktop ngang, mobile dọc. */
-const VB_DESKTOP = { w: 2560, h: 1086 };
-const VB_MOBILE = { w: 1429, h: 2561 };
+const VB_DESKTOP = { w: 2752, h: 1536 };
+const VB_MOBILE = { w: 768, h: 1376 };
 
 /**
  * Vùng chọn từng làng nghề — toạ độ theo % khung ảnh (cx,cy: tâm; d: đường kính theo %
  * CHIỀU RỘNG). Chuyển sang pixel viewBox lúc render. Emblem trên ảnh là hình TRÒN thật
  * (ảnh không còn bị kéo méo) nên vòng highlight là circle 1:1.
  * 👉 Căn tay các số này cho khớp vòng tròn emblem trên ảnh thật.
+ *
+ * Ảnh bản đồ desktop mới (2752×1536) chỉ vẽ 3 làng nghề: Mộc (trên–trái),
+ * Quạt (vòng vàng giữa), Tre (trên–phải). Trang /nghe-son vẫn vào được qua menu.
  */
 const ZONES = [
-  { slug: "nghe-moc", cx: 23.9, cy: 33, d: 13 }, // Mộc (trái – trên)
-  { slug: "nghe-son", cx: 21.9, cy: 72.0, d: 11.5 }, // Sơn (trái – dưới)
-  { slug: "nghe-quat", cx: 50.1, cy: 53.2, d: 15 }, // Quạt (vòng vàng giữa)
-  { slug: "nghe-tre", cx: 76.6, cy: 35.0, d: 13 }, // Tre (phải)
+  { slug: "nghe-moc", cx: 22.7, cy: 28, d: 14 }, // Mộc (medallion gỗ, trên – trái)
+  { slug: "nghe-quat", cx: 50, cy: 49.9, d: 18 }, // Quạt (vòng vàng phát sáng, giữa)
+  { slug: "nghe-tre", cx: 80, cy: 29, d: 14 }, // Tre (medallion tre, trên – phải)
 ];
 
-/** Bản dọc cho điện thoại (ảnh 1429×2561). Toạ độ ước lượng — căn tay lại cho khớp. */
+/**
+ * Bản dọc cho điện thoại (ảnh 768×1376) — bản mới chỉ còn 3 làng (bỏ Sơn):
+ * Quạt (trên – trái), Mộc (giữa – phải), Tre (dưới – phải).
+ */
 const ZONES_MOBILE = [
-  { slug: "nghe-quat", cx: 32, cy: 21, d: 40 }, // Quạt (vòng vàng, trên cùng)
-  { slug: "nghe-moc", cx: 73, cy: 46, d: 32 }, // Mộc (phải – giữa)
-  { slug: "nghe-son", cx: 33, cy: 62, d: 32 }, // Sơn (trái – dưới)
-  { slug: "nghe-tre", cx: 66, cy: 85, d: 32 }, // Tre (dưới cùng)
+  { slug: "nghe-quat", cx: 27, cy: 22, d: 34 }, // Quạt (vòng vàng, trên – trái)
+  { slug: "nghe-moc", cx: 73, cy: 42, d: 30 }, // Mộc (medallion gỗ, giữa – phải)
+  { slug: "nghe-tre", cx: 74, cy: 83, d: 30 }, // Tre (medallion tre, dưới – phải)
 ];
 
 type Zone = { slug: string; cx: number; cy: number; d: number };
@@ -97,15 +105,15 @@ export function MapHero() {
         par="xMidYMid"
         onSelect={(slug) => navigate(`/${slug}`)}
       />
-      {/* DESKTOP / TABLET (bản ngang) — neo mép TRÊN (YMin) để tấm biển tiêu đề luôn
-          hiện đủ dưới navbar, chỉ crop bớt ở đáy. */}
+      {/* DESKTOP / TABLET (bản ngang) — `none`: ép khít cả ngang lẫn dọc để hiện TRỌN
+          khung bản đồ (không tràn đáy ra ngoài màn). */}
       <MapSvg
         ref={desktopSvgRef}
         className="hidden sm:block"
         src={BANNER_SRC}
         vb={VB_DESKTOP}
         zones={zones}
-        par="xMidYMin"
+        par="none"
         onSelect={(slug) => navigate(`/${slug}`)}
       />
     </section>
@@ -117,43 +125,54 @@ type MapSvgProps = {
   src: string;
   vb: { w: number; h: number };
   zones: (Zone & { craft: NonNullable<ReturnType<typeof getCraft>> })[];
-  /** Căn ảnh khi cover: "xMidYMin" ghim mép trên, "xMidYMid" căn giữa. */
-  par?: "xMidYMid" | "xMidYMin";
+  /**
+   * Cách khít ảnh vào khung:
+   * - "none": kéo khít cả 2 chiều (hiện trọn ảnh, có thể méo nhẹ).
+   * - "xMidYMin"/"xMidYMid": cover/crop, ghim mép trên / căn giữa.
+   */
+  par?: "xMidYMid" | "xMidYMin" | "none";
   onSelect: (slug: string) => void;
 };
 
 function MapSvg({ className, src, vb, zones, par = "xMidYMid", onSelect, ref }: MapSvgProps & {
   ref?: React.Ref<SVGSVGElement>;
 }) {
-  const preserve = `${par} slice`;
+  const preserve = par === "none" ? "none" : `${par} slice`;
   return (
-    <svg
-      ref={ref}
-      viewBox={`0 0 ${vb.w} ${vb.h}`}
-      preserveAspectRatio={preserve}
-      // Chừa đúng chiều cao navbar (h-16 / sm:h-20) để map không bị che mép trên.
-      className={`absolute inset-x-0 bottom-0 top-16 h-auto w-full select-none sm:top-20 ${className ?? ""}`}
+    // Wrapper (block thường) định KHUNG = từ dưới navbar (top-16 = chiều cao navbar) tới đáy màn.
+    // svg lấp đầy khung này bằng h-full → preserveAspectRatio mới thực sự quyết định cách
+    // khít ảnh. (Nếu để h-auto trên svg, nó tự lấy chiều cao theo tỉ lệ ảnh và `none` vô tác
+    // dụng → đáy ảnh tràn ra ngoài màn.)
+    <div
+      className={`absolute inset-x-0 bottom-0 top-16 select-none ${className ?? ""}`}
     >
-      {/* Ảnh nằm TRONG svg → cùng phép cover với hotspot, không bao giờ lệch */}
-      <image
-        href={src}
-        x={0}
-        y={0}
-        width={vb.w}
-        height={vb.h}
+      <svg
+        ref={ref}
+        viewBox={`0 0 ${vb.w} ${vb.h}`}
         preserveAspectRatio={preserve}
-      />
-      {zones.map((z) => (
-        <MapZone
-          key={z.slug}
-          cx={(z.cx / 100) * vb.w}
-          cy={(z.cy / 100) * vb.h}
-          r={(z.d / 100 / 2) * vb.w}
-          name={z.craft.name}
-          onSelect={() => onSelect(z.slug)}
+        className="block h-full w-full"
+      >
+        {/* Ảnh nằm TRONG svg → cùng phép biến đổi với hotspot, không bao giờ lệch */}
+        <image
+          href={src}
+          x={0}
+          y={0}
+          width={vb.w}
+          height={vb.h}
+          preserveAspectRatio={preserve}
         />
-      ))}
-    </svg>
+        {zones.map((z) => (
+          <MapZone
+            key={z.slug}
+            cx={(z.cx / 100) * vb.w}
+            cy={(z.cy / 100) * vb.h}
+            r={(z.d / 100 / 2) * vb.w}
+            name={z.craft.name}
+            onSelect={() => onSelect(z.slug)}
+          />
+        ))}
+      </svg>
+    </div>
   );
 }
 

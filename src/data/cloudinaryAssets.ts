@@ -1,8 +1,9 @@
 const cloudinaryBase = "https://res.cloudinary.com/dzwimbvjh/image/upload";
 const assetRoot = "GioTuLangLandingPage";
 
-function imageUrl(publicPath: string, transforms?: string) {
-  return `${cloudinaryBase}/${transforms ? `${transforms}/` : ""}${assetRoot}/${publicPath}`;
+function imageUrl(publicPath: string, transforms?: string, version?: string) {
+  const v = version ? `v${version}/` : "";
+  return `${cloudinaryBase}/${transforms ? `${transforms}/` : ""}${v}${assetRoot}/${publicPath}`;
 }
 
 const cloudinaryVideoBase = "https://res.cloudinary.com/dzwimbvjh/video/upload";
@@ -28,14 +29,17 @@ export const cloudinaryAssets = {
   // Bản đồ làng nghề dùng cho MapHero (lưu trên Cloudinary, không nằm trong repo).
   map: {
     banner: {
-      src: imageUrl("map/banner-di-san.jpg", "f_auto,q_auto,w_2560"),
-      rawSrc: imageUrl("map/banner-di-san.jpg"),
+      // version v1782355419 = lần upload ảnh bản đồ mới (2752×1536); thêm vào URL để
+      // vượt qua cache trình duyệt/CDN (Cache-Control max-age 30 ngày) khi đổi ảnh.
+      src: imageUrl("map/banner-di-san.jpg", "f_auto,q_auto,w_2560", "1782355419"),
+      rawSrc: imageUrl("map/banner-di-san.jpg", undefined, "1782355419"),
       alt: "Bản đồ di sản làng nghề Chàng Sơn",
     },
-    // Bản dọc dùng cho điện thoại (1429×2561).
+    // Bản dọc dùng cho điện thoại (768×1376) — bản mới bỏ làng Sơn (còn Quạt/Mộc/Tre).
+    // version v1782359309 để vượt cache trình duyệt/CDN khi đổi ảnh.
     bannerMobile: {
-      src: imageUrl("map/banner-di-san-mobile.jpg", "f_auto,q_auto,w_1429"),
-      rawSrc: imageUrl("map/banner-di-san-mobile.jpg"),
+      src: imageUrl("map/banner-di-san-mobile.jpg", "f_auto,q_auto,w_768", "1782359309"),
+      rawSrc: imageUrl("map/banner-di-san-mobile.jpg", undefined, "1782359309"),
       alt: "Bản đồ di sản làng nghề Chàng Sơn (bản dọc cho điện thoại)",
     },
   },
