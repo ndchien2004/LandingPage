@@ -33,14 +33,14 @@ export default function DuAnPage() {
         subtitle={projectIntro.lead}
       />
 
-      {/* Cấu trúc dự án: một nghề chính + ba nghề phụ */}
+      {/* Cấu trúc dự án: một nghề chính + hai nghề phụ */}
       <section className="py-16 sm:py-20">
         <Container>
           <Reveal>
             <SectionHeading
               eyebrow="Cấu trúc dự án"
-              title="Một nghề chính, ba nhánh phụ"
-              description="Nghề quạt là trọng tâm của Gió Từ Làng, từ đó mở rộng sang mộc, sơn và tre."
+              title="Một nghề chính, hai nhánh phụ"
+              description="Nghề quạt là trọng tâm của Gió Từ Làng, từ đó mở rộng sang mộc và tre."
             />
           </Reveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-[1.3fr_2fr] lg:items-stretch">

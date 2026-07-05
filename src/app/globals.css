@@ -53,6 +53,12 @@ a {
   text-decoration: none;
 }
 
+/* Chống "rơi chữ": không để 1 từ lẻ loi ở dòng cuối của đoạn văn.
+   (Class text-balance/text-nowrap ở từng chỗ vẫn ghi đè được khi cần.) */
+p {
+  text-wrap: pretty;
+}
+
 ::selection {
   background: var(--color-son);
   color: var(--color-paper);

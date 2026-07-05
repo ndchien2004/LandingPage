@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s — Gió Từ Làng",
   },
   description:
-    "Gió Từ Làng là hành trình kể chuyện về làng nghề Chàng Sơn: nghề quạt, nghề mộc, nghề sơn và nghề tre. Mỗi nghề là một chương riêng, một câu chuyện thủ công Việt Nam.",
+    "Gió Từ Làng là hành trình kể chuyện về làng nghề Chàng Sơn: nghề quạt, nghề mộc và nghề tre. Mỗi nghề là một chương riêng, một câu chuyện thủ công Việt Nam.",
   keywords: [
     "Chàng Sơn",
     "làng nghề",

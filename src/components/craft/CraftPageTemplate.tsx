@@ -1,6 +1,4 @@
-import Link from "next/link";
 import type { Craft } from "@/data/crafts";
-import { crafts } from "@/data/crafts";
 import { site } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -9,7 +7,6 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 
 export function CraftPageTemplate({ craft }: { craft: Craft }) {
-  const others = crafts.filter((c) => c.slug !== craft.slug);
 
   return (
     <>
@@ -37,9 +34,6 @@ export function CraftPageTemplate({ craft }: { craft: Craft }) {
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/san-pham" variant="primary">
                 Xem sản phẩm
-              </Button>
-              <Button href="/lien-he" variant="outline">
-                Liên hệ đặt làm
               </Button>
             </div>
           </Reveal>
@@ -237,40 +231,6 @@ export function CraftPageTemplate({ craft }: { craft: Craft }) {
         </Container>
       </section>
 
-      {/* Điều hướng sang các nghề khác */}
-      <section className="border-t border-line bg-paper-2/40 py-20 sm:py-24">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="Tiếp tục hành trình"
-              title="Lật sang chương tiếp theo"
-              description="Mỗi nghề là một câu chuyện riêng. Khép lại chương này, hãy bước sang một nghề khác của làng."
-            />
-          </Reveal>
-          <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-3">
-            {others.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/${c.slug}`}
-                className="group flex items-center justify-between rounded-2xl border border-line bg-white/70 p-6 transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
-              >
-                <div>
-                  <p
-                    className="text-[0.7rem] uppercase tracking-[0.2em]"
-                    style={{ color: c.accent }}
-                  >
-                    Chương {c.order}
-                  </p>
-                  <h3 className="mt-1 font-display text-xl text-ink">{c.name}</h3>
-                </div>
-                <span className="text-ink-soft transition group-hover:translate-x-1 group-hover:text-son">
-                  →
-                </span>
-              </Link>
-            ))}
-          </Reveal>
-        </Container>
-      </section>
     </>
   );
 }

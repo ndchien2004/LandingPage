@@ -1,7 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Craft } from "@/data/crafts";
-import { crafts } from "@/data/crafts";
 import { site } from "@/data/site";
 import { cloudinaryAssets } from "@/data/cloudinaryAssets";
 import { Container } from "@/components/ui/Container";
@@ -16,7 +14,6 @@ const img = cloudinaryAssets.crafts.quat;
  * Bố cục biên tập giàu hình ảnh & video, hạn chế dùng card cho ảnh.
  */
 export function QuatStory({ craft }: { craft: Craft }) {
-  const others = crafts.filter((c) => c.slug !== craft.slug);
 
   return (
     <>
@@ -56,13 +53,6 @@ export function QuatStory({ craft }: { craft: Craft }) {
                 className="bg-son-deep text-paper shadow-[0_18px_38px_-18px_rgba(0,0,0,0.8)] hover:bg-son"
               >
                 Xem sản phẩm
-              </Button>
-              <Button
-                href="/lien-he"
-                variant="outline"
-                className="border-paper/80 bg-paper/90 text-ink shadow-[0_14px_32px_-20px_rgba(0,0,0,0.75)] backdrop-blur-sm hover:border-paper hover:bg-paper hover:text-son"
-              >
-                Liên hệ đặt làm
               </Button>
             </div>
           </Reveal>
@@ -438,40 +428,6 @@ export function QuatStory({ craft }: { craft: Craft }) {
         </Container>
       </section>
 
-      {/* Điều hướng sang nghề khác */}
-      <section className="border-t border-line py-20 sm:py-24">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="Tiếp tục hành trình"
-              title="Lật sang chương tiếp theo"
-              description="Mỗi nghề là một câu chuyện riêng. Khép lại chương này, hãy bước sang một nghề khác của làng."
-            />
-          </Reveal>
-          <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-3">
-            {others.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/${c.slug}`}
-                className="group flex items-center justify-between rounded-2xl border border-line bg-white/70 p-6 transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
-              >
-                <div>
-                  <p
-                    className="text-[0.7rem] uppercase tracking-[0.2em]"
-                    style={{ color: c.accent }}
-                  >
-                    Chương {c.order}
-                  </p>
-                  <h3 className="mt-1 font-display text-xl text-ink">{c.name}</h3>
-                </div>
-                <span className="text-ink-soft transition group-hover:translate-x-1 group-hover:text-son">
-                  →
-                </span>
-              </Link>
-            ))}
-          </Reveal>
-        </Container>
-      </section>
     </>
   );
 }

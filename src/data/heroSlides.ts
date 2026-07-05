@@ -14,7 +14,7 @@ const bySlug = (slug: string) => crafts.find((c) => c.slug === slug)!;
 
 /**
  * Các slide của hero full màn hình (chạy lần lượt như từng chương truyện).
- * Slide đầu mở chuyện, bốn slide sau dẫn vào bốn nghề của làng.
+ * Slide đầu mở chuyện, ba slide sau dẫn vào ba nghề của làng.
  */
 export const heroSlides: HeroSlide[] = [
   {
@@ -22,7 +22,7 @@ export const heroSlides: HeroSlide[] = [
     eyebrow: "Làng nghề Chàng Sơn",
     title: "Gió Từ Làng",
     subtitle:
-      "Có những nghề được giữ lại không bằng sách vở, mà bằng đôi tay. Hãy bắt đầu hành trình về Chàng Sơn — nơi gió kể lại câu chuyện của quạt, mộc, sơn và tre.",
+      "Có những nghề được giữ lại không bằng sách vở, mà bằng đôi tay. Hãy bắt đầu hành trình về Chàng Sơn — nơi gió kể lại câu chuyện của quạt, mộc và tre.",
     cta: "Bắt đầu hành trình",
     href: "/du-an",
     accent: "#b23a2e",
@@ -48,18 +48,8 @@ export const heroSlides: HeroSlide[] = [
     accent: bySlug("nghe-moc").accent,
   },
   {
-    key: "son",
-    eyebrow: "Chương 03 — Nghề Sơn",
-    title: "Chiều Sâu Ủ Trong Thời Gian",
-    subtitle:
-      "Sơn ta không vội. Lớp này chồng lên lớp khác, ủ qua bao ngày nắng, để chiều sâu của màu tự mình hiện lên.",
-    cta: "Khám phá Nghề Sơn",
-    href: "/nghe-son",
-    accent: bySlug("nghe-son").accent,
-  },
-  {
     key: "tre",
-    eyebrow: "Chương 04 — Nghề Tre",
+    eyebrow: "Chương 03 — Nghề Tre",
     title: "Sự Dẻo Dai Của Làng Quê",
     subtitle:
       "Tre uốn được mà không gãy. Trong tay người thợ, thân tre mộc mạc hóa thành những vật dụng thân quen của nếp sống Việt.",

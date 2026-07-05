@@ -15,7 +15,6 @@ export const mainNav: NavItem[] = [
 export const craftNav: NavItem[] = [
   { label: "Nghề Quạt", href: "/nghe-quat" },
   { label: "Nghề Mộc", href: "/nghe-moc" },
-  { label: "Nghề Sơn", href: "/nghe-son" },
   { label: "Nghề Tre", href: "/nghe-tre" },
 ];
 

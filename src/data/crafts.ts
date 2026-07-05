@@ -136,8 +136,9 @@ export const crafts: Craft[] = [
     image: "/images/crafts/moc.jpg",
     hero: {
       title: "Nghề Mộc Chàng Sơn",
+      // NBSP nối cụm cuối → "nếp nhà, đồ thờ và hồn cốt kiến trúc Việt." luôn tròn 1 dòng.
       subtitle:
-        "Từ những khối gỗ thô mộc, bàn tay người thợ chạm khắc nên nếp nhà, đồ thờ và hồn cốt kiến trúc Việt.",
+        "Từ những khối gỗ thô mộc, bàn tay người thợ chạm khắc nên nếp nhà, đồ thờ và hồn cốt kiến trúc Việt.",
     },
     intro: [
       "Nghề mộc Chàng Sơn nổi tiếng với những người thợ tài hoa, từng góp tay dựng nên nhiều công trình kiến trúc gỗ truyền thống. Sự tỉ mỉ trong từng mộng, từng đường chạm đã làm nên danh tiếng của làng.",
@@ -170,8 +171,9 @@ export const crafts: Craft[] = [
       {
         step: "02",
         title: "Pha và tạo phôi",
+        //   (no-break space) giữ "sản phẩm" luôn nằm cùng một dòng.
         description:
-          "Người thợ đo, cắt và tạo hình phôi gỗ, đặt nền cho toàn bộ kết cấu sản phẩm.",
+          "Người thợ đo, cắt và tạo hình phôi gỗ, đặt nền cho toàn bộ kết cấu sản phẩm.",
       },
       {
         step: "03",
@@ -182,8 +184,9 @@ export const crafts: Craft[] = [
       {
         step: "04",
         title: "Hoàn thiện bề mặt",
+        //   giữ "vẻ đẹp" luôn nằm cạnh nhau khi xuống dòng.
         description:
-          "Sản phẩm được làm nhẵn, đánh bóng hoặc phủ lớp bảo vệ để tôn lên vẻ đẹp tự nhiên của gỗ.",
+          "Sản phẩm được làm nhẵn, đánh bóng hoặc phủ lớp bảo vệ để tôn lên vẻ đẹp tự nhiên của gỗ.",
       },
     ],
     people: {
@@ -204,87 +207,9 @@ export const crafts: Craft[] = [
     ],
   },
   {
-    slug: "nghe-son",
-    name: "Nghề Sơn",
-    order: "03",
-    kicker: "Lớp sơn ủ trong thời gian",
-    cardDescription:
-      "Sơn ta được ủ qua nhiều lớp, nhiều ngày — kiên nhẫn để chiều sâu màu sắc tự hiện lên.",
-    accent: "#c2703d",
-    image: "/images/crafts/son.jpg",
-    hero: {
-      title: "Nghề Sơn Chàng Sơn",
-      subtitle:
-        "Lớp này chồng lên lớp khác, sơn ta ủ trong thời gian để bật lên chiều sâu óng ả khó nơi nào có được.",
-    },
-    intro: [
-      "Nghề sơn ở Chàng Sơn gắn liền với kỹ thuật sơn truyền thống, đòi hỏi sự kiên nhẫn và am hiểu vật liệu. Mỗi sản phẩm là kết quả của nhiều lớp sơn được ủ và mài công phu.",
-      "Vẻ đẹp của sơn không nằm ở sự rực rỡ tức thì, mà ở chiều sâu và độ bền của màu sắc theo năm tháng — thứ chỉ thời gian và bàn tay người thợ mới tạo ra được.",
-    ],
-    values: [
-      {
-        title: "Chiều sâu của màu",
-        description:
-          "Nhiều lớp sơn được phủ và mài tạo nên độ sâu và độ óng đặc trưng không thể làm vội.",
-      },
-      {
-        title: "Bền với thời gian",
-        description:
-          "Kỹ thuật sơn truyền thống giúp sản phẩm giữ được vẻ đẹp lâu dài, càng dùng càng đằm.",
-      },
-      {
-        title: "Kết hợp cùng các nghề khác",
-        description:
-          "Nghề sơn tôn lên giá trị của đồ mộc, đồ thờ và nhiều sản phẩm thủ công khác.",
-      },
-    ],
-    process: [
-      {
-        step: "01",
-        title: "Chuẩn bị cốt",
-        description:
-          "Cốt sản phẩm (gỗ, tre, vật liệu khác) được xử lý phẳng, sạch để lớp sơn bám chắc.",
-      },
-      {
-        step: "02",
-        title: "Phủ lớp lót",
-        description:
-          "Những lớp sơn lót đầu tiên được phủ và để khô tự nhiên, tạo nền vững cho các lớp sau.",
-      },
-      {
-        step: "03",
-        title: "Ủ và mài nhiều lớp",
-        description:
-          "Sơn được phủ chồng nhiều lớp, mỗi lớp đều phải ủ và mài kỹ — công đoạn cần nhiều thời gian nhất.",
-      },
-      {
-        step: "04",
-        title: "Đánh bóng hoàn thiện",
-        description:
-          "Bề mặt được đánh bóng để bật lên độ sâu và sắc óng đặc trưng của sơn truyền thống.",
-      },
-    ],
-    people: {
-      quote:
-        "Nghề sơn dạy người ta chờ đợi. Vội một chút là lớp sơn không lên được cái đằm của nó.",
-      author: "Nghệ nhân làng Chàng Sơn",
-      role: "Người giữ nghề sơn",
-      body: [
-        "Người thợ sơn phải sống cùng nhịp của vật liệu: chờ từng lớp khô, mài từng lớp mỏng, kiên nhẫn qua nhiều ngày để có được bề mặt ưng ý.",
-        "Gió Từ Làng trân trọng sự bền bỉ ấy, và mong muốn giới thiệu nghề sơn như một biểu tượng của sự tỉ mỉ và chiều sâu trong văn hóa thủ công Việt.",
-      ],
-    },
-    products: [
-      { name: "Đồ thờ sơn truyền thống", note: "Trang nghiêm, bền màu" },
-      { name: "Tranh và hộp sơn", note: "Chiều sâu màu đặc trưng" },
-      { name: "Vật phẩm trang trí phủ sơn", note: "Tôn vẻ đẹp của cốt mộc, tre" },
-      { name: "Sản phẩm phối hợp nghề mộc", note: "Kết hợp chạm khắc và sơn phủ" },
-    ],
-  },
-  {
     slug: "nghe-tre",
     name: "Nghề Tre",
-    order: "04",
+    order: "03",
     kicker: "Sự dẻo dai của làng quê",
     cardDescription:
       "Từ thân tre mộc mạc, người thợ đan nên những vật dụng gần gũi mà bền bỉ với đời sống Việt.",

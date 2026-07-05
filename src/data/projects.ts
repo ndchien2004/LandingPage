@@ -52,7 +52,7 @@ export const contentRoadmap: ContentWeek[] = [
   },
 ];
 
-/** Cấu trúc dự án: một nghề chính, ba nghề phụ. */
+/** Cấu trúc dự án: một nghề chính, hai nghề phụ. */
 export const projectStructure = {
   main: {
     name: "Gió Từ Làng — Nghề Quạt",
@@ -68,13 +68,6 @@ export const projectStructure = {
       href: "/nghe-moc",
       accent: "#7a3b2e",
       note: "Mở rộng câu chuyện sang nghề mộc cổ truyền của làng.",
-    },
-    {
-      name: "Nghề Sơn",
-      role: "Nhánh phụ",
-      href: "/nghe-son",
-      accent: "#c2703d",
-      note: "Chiều sâu của sơn ta — sự kiên nhẫn qua từng lớp ủ.",
     },
     {
       name: "Nghề Tre",
@@ -139,16 +132,6 @@ export const portfolio: ProjectItem[] = [
     image: "/images/projects/do-tho.jpg",
   },
   {
-    slug: "son-ta-thu-cong",
-    title: "Sơn ta trên đồ thủ công",
-    category: "Nghề Sơn",
-    description:
-      "Khám phá chiều sâu của sơn truyền thống qua từng lớp ủ, lớp mài kiên nhẫn.",
-    href: "/nghe-son",
-    accent: "#c2703d",
-    image: "/images/projects/son-ta.jpg",
-  },
-  {
     slug: "tre-doi-song-hien-dai",
     title: "Tre trong đời sống hiện đại",
     category: "Nghề Tre",
@@ -175,7 +158,7 @@ export const projectIntro = {
   lead: "Một dự án quảng bá làng nghề Chàng Sơn bằng ngôn ngữ của câu chuyện, hình ảnh và trải nghiệm.",
   paragraphs: [
     "Gió Từ Làng ra đời từ mong muốn đưa làng nghề Chàng Sơn đến gần hơn với công chúng — không chỉ như một địa danh, mà như một không gian văn hóa sống động đang tiếp tục thở và chuyển động.",
-    "Lấy nghề quạt làm hướng đi chính, dự án mở rộng sang nghề mộc, nghề sơn và nghề tre, để người xem có thể bước vào từng nghề như bước vào một hành trình khám phá riêng.",
+    "Lấy nghề quạt làm hướng đi chính, dự án mở rộng sang nghề mộc và nghề tre, để người xem có thể bước vào từng nghề như bước vào một hành trình khám phá riêng.",
   ],
 };
 
@@ -199,7 +182,7 @@ export const projectReasons: { title: string; description: string }[] = [
 
 export const projectGoals: string[] = [
   "Giới thiệu làng nghề Chàng Sơn tới công chúng, khách du lịch và người quan tâm văn hóa.",
-  "Tôn vinh giá trị của bốn nghề: quạt, mộc, sơn và tre.",
+  "Tôn vinh giá trị của ba nghề: quạt, mộc và tre.",
   "Tạo nền tảng trực quan để câu chuyện làng nghề tiếp tục được mở rộng.",
   "Kết nối người làm nghề với cộng đồng yêu thích thủ công truyền thống.",
 ];

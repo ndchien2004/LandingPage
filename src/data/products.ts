@@ -1,134 +1,135 @@
+import { productImage } from "./cloudinaryAssets";
+
 export type Product = {
   id: string;
   name: string;
-  category: "Quạt" | "Mộc" | "Sơn" | "Tre";
+  category: "Quạt" | "Mộc" | "Tre";
   price: string;
   description: string;
   image: string;
   tags: string[];
 };
 
-export const productCategories = ["Tất cả", "Quạt", "Mộc", "Sơn", "Tre"] as const;
+export const productCategories = ["Tất cả", "Quạt", "Mộc", "Tre"] as const;
 
+/**
+ * Sản phẩm thật của làng nghề — ảnh lưu trên Cloudinary
+ * (thư mục GioTuLangLandingPage/products, upload bằng scripts/upload-product-assets.mjs).
+ */
 export const products: Product[] = [
+  // — Nghề Quạt —
   {
-    id: "quat-giay-do-ve-tay",
-    name: "Quạt giấy dó vẽ tay",
+    id: "quat-co-nau-tram",
+    name: "Quạt cổ nâu trầm",
     category: "Quạt",
     price: "Liên hệ",
     description:
-      "Quạt giấy dó với họa tiết dân gian được vẽ thủ công, phù hợp trưng bày và làm quà tặng văn hóa.",
-    image: "/images/products/quat-1.jpg",
-    tags: ["Thủ công", "Trưng bày"],
+      "Chiếc quạt cổ mang sắc nâu trầm của thời gian, nan tre và mặt quạt nhuốm màu năm tháng — một hiện vật quý của nghề quạt Chàng Sơn.",
+    image: productImage("quat-co-nau-tram"),
+    tags: ["Quạt cổ", "Sưu tầm"],
   },
   {
-    id: "quat-lua-thu-phap",
-    name: "Quạt lụa thư pháp",
+    id: "quat-dong-ho-lon-dan",
+    name: "Quạt giấy Đông Hồ — Lợn đàn",
     category: "Quạt",
     price: "Liên hệ",
     description:
-      "Mặt quạt lụa mềm mại, điểm nét thư pháp trang nhã — món quà mang đậm tinh thần truyền thống.",
-    image: "/images/products/quat-2.jpg",
-    tags: ["Quà tặng", "Thư pháp"],
+      "Quạt giấy trắng in tranh dân gian Đông Hồ “Lợn đàn” — biểu tượng của sung túc, đủ đầy, phù hợp làm quà tặng văn hóa.",
+    image: productImage("quat-dong-ho-lon-dan"),
+    tags: ["Tranh Đông Hồ", "Quà tặng"],
   },
   {
-    id: "quat-trang-tri-co-lon",
-    name: "Quạt trang trí cỡ lớn",
+    id: "quat-thu-phap",
+    name: "Quạt lụa thư pháp Cha Mẹ",
     category: "Quạt",
     price: "Liên hệ",
     description:
-      "Cánh quạt khổ lớn làm điểm nhấn cho không gian mang hơi hướng truyền thống.",
-    image: "/images/products/quat-3.jpg",
-    tags: ["Nội thất", "Điểm nhấn"],
+      "Mặt quạt lụa tím điểm nét thư pháp vàng về công ơn cha mẹ — món quà ý nghĩa cho ngày lễ và dịp tri ân.",
+    image: productImage("quat-thu-phap"),
+    tags: ["Thư pháp", "Lụa"],
   },
   {
-    id: "do-tho-cham-khac",
-    name: "Đồ thờ chạm khắc",
+    id: "quat-dai-go-phong-canh",
+    name: "Quạt đại gỗ — Phong cảnh làng quê",
+    category: "Quạt",
+    price: "Liên hệ",
+    description:
+      "Quạt trưng bày khổ lớn vẽ tay cảnh làng quê Việt: cây đa, bến nước, mái đình — điểm nhấn cho không gian truyền thống.",
+    image: productImage("quat-dai-go-phong-canh"),
+    tags: ["Trưng bày", "Vẽ tay"],
+  },
+
+  // — Nghề Mộc —
+  {
+    id: "moc-hoanh-phi-cau-doi",
+    name: "Bộ hoành phi câu đối sơn son thếp vàng",
     category: "Mộc",
     price: "Liên hệ",
     description:
-      "Sản phẩm đồ thờ được chạm khắc tinh xảo theo lối truyền thống, trang nghiêm và bền chắc.",
-    image: "/images/products/moc-1.jpg",
+      "Bộ hoành phi, câu đối chạm khắc công phu, thếp vàng trang nghiêm — tôn lên không gian thờ tự của gia đình Việt.",
+    image: productImage("moc-hoanh-phi-cau-doi"),
+    tags: ["Đồ thờ", "Thếp vàng"],
+  },
+  {
+    id: "moc-do-tho-cham-khac",
+    name: "Bộ đồ thờ chạm khắc cổ",
+    category: "Mộc",
+    price: "Liên hệ",
+    description:
+      "Án gian, tủ thờ chạm khắc theo lối cổ với từng mảng hoa văn tinh xảo, giữ trọn nét trang nghiêm truyền thống.",
+    image: productImage("moc-do-tho-cham-khac"),
     tags: ["Chạm khắc", "Truyền thống"],
   },
   {
-    id: "hoanh-phi-cau-doi",
-    name: "Hoành phi câu đối",
+    id: "moc-noi-that-truyen-thong",
+    name: "Nội thất gỗ truyền thống",
     category: "Mộc",
     price: "Liên hệ",
     description:
-      "Hoành phi, câu đối gỗ lưu giữ nét chữ và hoa văn cổ, tôn lên không gian thờ tự.",
-    image: "/images/products/moc-2.jpg",
-    tags: ["Gỗ", "Hoa văn cổ"],
+      "Không gian nhà gỗ với hệ vì kèo, cửa võng và mảng chạm liền khối — dấu ấn của bàn tay thợ mộc Chàng Sơn.",
+    image: productImage("moc-noi-that-truyen-thong"),
+    tags: ["Nhà gỗ", "Kiến trúc"],
   },
   {
-    id: "tuong-phu-dieu-go",
-    name: "Tượng & phù điêu gỗ",
+    id: "moc-tuong-nghe-go",
+    name: "Tượng nghê gỗ",
     category: "Mộc",
     price: "Liên hệ",
     description:
-      "Tác phẩm trang trí thủ công, thể hiện trình độ chạm khắc của người thợ Chàng Sơn.",
-    image: "/images/products/moc-3.jpg",
-    tags: ["Trang trí", "Thủ công"],
+      "Tượng nghê chạm khắc thủ công từ khối gỗ nguyên, đường nét sống động — linh vật gác cửa quen thuộc của người Việt.",
+    image: productImage("moc-tuong-nghe-go"),
+    tags: ["Tượng gỗ", "Linh vật"],
   },
+
+  // — Nghề Tre —
   {
-    id: "hop-son-truyen-thong",
-    name: "Hộp sơn truyền thống",
-    category: "Sơn",
-    price: "Liên hệ",
-    description:
-      "Hộp phủ nhiều lớp sơn ủ công phu, bật lên chiều sâu màu sắc đặc trưng.",
-    image: "/images/products/son-1.jpg",
-    tags: ["Sơn ta", "Chiều sâu màu"],
-  },
-  {
-    id: "tranh-son-trang-tri",
-    name: "Tranh sơn trang trí",
-    category: "Sơn",
-    price: "Liên hệ",
-    description:
-      "Tranh hoàn thiện bằng kỹ thuật sơn truyền thống, càng nhìn càng thấy độ óng đằm.",
-    image: "/images/products/son-2.jpg",
-    tags: ["Tranh", "Truyền thống"],
-  },
-  {
-    id: "vat-pham-phu-son",
-    name: "Vật phẩm phủ sơn",
-    category: "Sơn",
-    price: "Liên hệ",
-    description:
-      "Vật phẩm trang trí phủ sơn, tôn lên vẻ đẹp của cốt mộc và tre bên dưới.",
-    image: "/images/products/son-3.jpg",
-    tags: ["Phối nghề", "Trang trí"],
-  },
-  {
-    id: "gio-khay-tre",
-    name: "Giỏ & khay tre",
+    id: "tre-chuon-chuon",
+    name: "Chuồn chuồn tre",
     category: "Tre",
     price: "Liên hệ",
     description:
-      "Sản phẩm đan tre nhẹ và bền, phù hợp làm khay quà, giỏ đựng và vật dụng hằng ngày.",
-    image: "/images/products/tre-1.jpg",
-    tags: ["Đan lát", "Gia dụng"],
+      "Chuồn chuồn tre vẽ tay nhiều màu, tự thăng bằng trên đầu ngón tay — món đồ chơi dân gian được cả trẻ em và du khách yêu thích.",
+    image: productImage("tre-chuon-chuon"),
+    tags: ["Đồ chơi dân gian", "Quà lưu niệm"],
   },
   {
-    id: "den-tre-trang-tri",
-    name: "Đèn tre trang trí",
+    id: "tre-gio-tre",
+    name: "Giỏ tre đan thủ công",
     category: "Tre",
     price: "Liên hệ",
     description:
-      "Đèn đan tre tạo ánh sáng ấm áp, mộc mạc, phù hợp không gian sống hiện đại.",
-    image: "/images/products/tre-2.jpg",
-    tags: ["Ánh sáng", "Mộc mạc"],
+      "Bộ sưu tập giỏ tre đan tay đủ kiểu dáng: giỏ quà, giỏ picnic, giỏ đựng đồ — nhẹ, bền và thân thiện với môi trường.",
+    image: productImage("tre-gio-tre"),
+    tags: ["Đan lát", "Quà tặng"],
   },
   {
-    id: "san-pham-tre-hien-dai",
-    name: "Sản phẩm tre hiện đại",
+    id: "tre-do-gia-dung",
+    name: "Đồ gia dụng đan tre",
     category: "Tre",
     price: "Liên hệ",
     description:
-      "Thiết kế mới trên vật liệu tre truyền thống, hướng tới lối sống xanh và bền vững.",
-    image: "/images/products/tre-3.jpg",
-    tags: ["Thiết kế mới", "Bền vững"],
+      "Khay, rổ, bát đan tre với hoa văn đều đặn, hữu dụng trong đời sống hằng ngày mà vẫn giàu tính thẩm mỹ.",
+    image: productImage("tre-do-gia-dung"),
+    tags: ["Gia dụng", "Mộc mạc"],
   },
 ];

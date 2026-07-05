@@ -31,7 +31,8 @@ export function PageHero({
         style={{ background: `${accent}1f` }}
       />
       <Container className="relative py-20 sm:py-28">
-        <Reveal stagger className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
+        {/* max-w-4xl: đủ rộng để câu dẫn không xuống dòng sớm khi màn còn diện tích */}
+        <Reveal stagger className={cn("max-w-4xl", align === "center" && "mx-auto text-center")}>
           {breadcrumb && (
             <Breadcrumb
               items={breadcrumb}
@@ -49,7 +50,8 @@ export function PageHero({
           {subtitle && (
             <p
               className={cn(
-                "mt-6 text-lg leading-8 text-muted",
+                // text-pretty: tránh "rơi chữ" — không để 1 từ lẻ loi ở dòng cuối
+                "mt-6 text-pretty text-lg leading-8 text-muted",
                 align === "center" && "mx-auto",
               )}
             >

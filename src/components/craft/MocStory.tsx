@@ -1,7 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Craft } from "@/data/crafts";
-import { crafts } from "@/data/crafts";
 import { site } from "@/data/site";
 import { cloudinaryAssets } from "@/data/cloudinaryAssets";
 import { Container } from "@/components/ui/Container";
@@ -16,7 +14,6 @@ const img = cloudinaryAssets.crafts.moc;
  * ưu tiên ảnh tràn viền và ghép ảnh thay vì các thẻ (card).
  */
 export function MocStory({ craft }: { craft: Craft }) {
-  const others = crafts.filter((c) => c.slug !== craft.slug);
 
   return (
     <>
@@ -43,7 +40,8 @@ export function MocStory({ craft }: { craft: Craft }) {
             <h1 className="font-display text-4xl leading-[1.06] text-paper drop-shadow-[0_2px_18px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-6xl">
               {craft.hero.title}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-paper/90">
+            {/* text-balance: chia 2 dòng cân nhau → cụm cuối không bị gãy giữa chừng */}
+            <p className="mt-6 max-w-2xl text-balance text-lg leading-8 text-paper/90">
               {craft.hero.subtitle}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -53,13 +51,6 @@ export function MocStory({ craft }: { craft: Craft }) {
                 className="bg-son-deep text-paper shadow-[0_18px_38px_-18px_rgba(0,0,0,0.8)] hover:bg-son"
               >
                 Xem sản phẩm
-              </Button>
-              <Button
-                href="/lien-he"
-                variant="outline"
-                className="border-paper/80 bg-paper/90 text-ink shadow-[0_14px_32px_-20px_rgba(0,0,0,0.75)] backdrop-blur-sm hover:border-paper hover:bg-paper hover:text-son"
-              >
-                Liên hệ đặt làm
               </Button>
             </div>
           </Reveal>
@@ -213,7 +204,8 @@ export function MocStory({ craft }: { craft: Craft }) {
                   <h3 className="mt-1 font-display text-lg text-ink">
                     {step.title}
                   </h3>
-                  <p className="mt-2 max-w-lg text-sm leading-7 text-muted">
+                  {/* max-w-xl + text-pretty: mô tả gọn 1 dòng khi đủ chỗ, không rơi chữ lẻ */}
+                  <p className="mt-2 max-w-xl text-pretty text-sm leading-7 text-muted">
                     {step.description}
                   </p>
                 </div>
@@ -347,40 +339,6 @@ export function MocStory({ craft }: { craft: Craft }) {
         </Container>
       </section>
 
-      {/* Điều hướng sang nghề khác */}
-      <section className="border-t border-line py-20 sm:py-24">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="Tiếp tục hành trình"
-              title="Lật sang chương tiếp theo"
-              description="Mỗi nghề là một câu chuyện riêng. Khép lại chương này, hãy bước sang một nghề khác của làng."
-            />
-          </Reveal>
-          <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-3">
-            {others.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/${c.slug}`}
-                className="group flex items-center justify-between rounded-2xl border border-line bg-white/70 p-6 transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
-              >
-                <div>
-                  <p
-                    className="text-[0.7rem] uppercase tracking-[0.2em]"
-                    style={{ color: c.accent }}
-                  >
-                    Chương {c.order}
-                  </p>
-                  <h3 className="mt-1 font-display text-xl text-ink">{c.name}</h3>
-                </div>
-                <span className="text-ink-soft transition group-hover:translate-x-1 group-hover:text-son">
-                  →
-                </span>
-              </Link>
-            ))}
-          </Reveal>
-        </Container>
-      </section>
     </>
   );
 }

@@ -1,22 +1,16 @@
+import Image from "next/image";
 import type { Product } from "@/data/products";
-import { Placeholder } from "./Placeholder";
-
-const accentByCategory: Record<Product["category"], string> = {
-  Quạt: "#b23a2e",
-  Mộc: "#7a3b2e",
-  Sơn: "#c2703d",
-  Tre: "#6f7a3b",
-};
 
 export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white/70 transition duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card)]">
       <div className="relative overflow-hidden">
-        <Placeholder
-          label={product.name}
-          accent={accentByCategory[product.category]}
-          className="aspect-[4/5] w-full rounded-none transition duration-700 group-hover:scale-[1.03]"
-          showHint={false}
+        <Image
+          src={product.image}
+          alt={product.name}
+          width={900}
+          height={1125}
+          className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
         />
         <span className="absolute left-3 top-3 rounded-full bg-paper/90 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-nau">
           {product.category}

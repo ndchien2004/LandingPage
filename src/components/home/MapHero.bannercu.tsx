@@ -18,7 +18,6 @@ gsap.registerPlugin(useGSAP);
 const MAP_POINTS: Record<string, { x: number; y: number }> = {
   "nghe-quat": { x: 16, y: 66 },
   "nghe-moc": { x: 37, y: 49 },
-  "nghe-son": { x: 58, y: 63 },
   "nghe-tre": { x: 80, y: 53 },
 };
 

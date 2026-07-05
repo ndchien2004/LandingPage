@@ -6,6 +6,14 @@ function imageUrl(publicPath: string, transforms?: string, version?: string) {
   return `${cloudinaryBase}/${transforms ? `${transforms}/` : ""}${v}${assetRoot}/${publicPath}`;
 }
 
+/**
+ * Ảnh sản phẩm trong thư mục Cloudinary `GioTuLangLandingPage/products`
+ * (upload bằng scripts/upload-product-assets.mjs). Crop 4:5 khớp khung ProductCard.
+ */
+export function productImage(publicId: string) {
+  return imageUrl(`products/${publicId}.jpg`, "f_auto,q_auto,c_fill,w_900,h_1125");
+}
+
 const cloudinaryVideoBase = "https://res.cloudinary.com/dzwimbvjh/video/upload";
 
 /** URL video .mp4 đã tối ưu (f_auto,q_auto…). publicPath không kèm đuôi. */

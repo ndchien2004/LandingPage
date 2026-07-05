@@ -37,8 +37,8 @@ const VB_MOBILE = { w: 768, h: 1376 };
  * (ảnh không còn bị kéo méo) nên vòng highlight là circle 1:1.
  * 👉 Căn tay các số này cho khớp vòng tròn emblem trên ảnh thật.
  *
- * Ảnh bản đồ desktop mới (2752×1536) chỉ vẽ 3 làng nghề: Mộc (trên–trái),
- * Quạt (vòng vàng giữa), Tre (trên–phải). Trang /nghe-son vẫn vào được qua menu.
+ * Ảnh bản đồ desktop mới (2752×1536) vẽ 3 làng nghề: Mộc (trên–trái),
+ * Quạt (vòng vàng giữa), Tre (trên–phải).
  */
 const ZONES = [
   { slug: "nghe-moc", cx: 22.7, cy: 28, d: 14 }, // Mộc (medallion gỗ, trên – trái)

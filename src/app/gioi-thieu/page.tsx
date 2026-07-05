@@ -33,7 +33,7 @@ const identity = [
 
 const facts = [
   { label: "Vị trí", value: "Thạch Thất, Hà Nội" },
-  { label: "Nghề tiêu biểu", value: "Quạt · Mộc · Sơn · Tre" },
+  { label: "Nghề tiêu biểu", value: "Quạt · Mộc · Tre" },
   { label: "Tinh thần", value: "Thủ công truyền thống" },
 ];
 
@@ -105,7 +105,7 @@ export default function GioiThieuPage() {
               <p>
                 Ở Chàng Sơn, nghề và đời gắn bó làm một. Nhịp sống của làng hòa
                 cùng nhịp của nghề — từ tiếng chẻ tre, tiếng đục gỗ đến những
-                ngày phơi quạt, ủ sơn. Tất cả tạo nên một không gian văn hóa
+                ngày phơi quạt trước sân. Tất cả tạo nên một không gian văn hóa
                 sống động và bền bỉ.
               </p>
             </div>
@@ -239,7 +239,7 @@ export default function GioiThieuPage() {
               <p>
                 <span className="font-medium text-ink">Gió Từ Làng</span> vì thế
                 là lời mời gọi: hãy để ngọn gió của làng nghề đưa bạn vào một
-                hành trình khám phá quạt, mộc, sơn và tre.
+                hành trình khám phá quạt, mộc và tre.
               </p>
             </div>
           </Reveal>
