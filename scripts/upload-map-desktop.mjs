@@ -14,7 +14,7 @@ const JPEG_QUALITY = 90;
 // Bản đồ di sản phiên bản NGANG (desktop/tablet) dùng cho MapHero.
 // Giữ đúng public_id cũ "banner-di-san" để URL trong code không phải đổi.
 const SOURCE_FILE =
-  "C:\\Users\\ndcpr\\Downloads\\Logo + banner\\Gemini_Generated_Image_xe1ckdxe1ckdxe1c.png";
+  "C:\\Users\\ndcpr\\Downloads\\ChatGPT Image 15_18_58 6 thg 7, 2026.png";
 const PUBLIC_ID = "banner-di-san";
 
 async function prepareImage(buffer) {

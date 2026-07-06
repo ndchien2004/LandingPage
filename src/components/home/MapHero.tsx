@@ -28,7 +28,7 @@ const BANNER_SRC = cloudinaryAssets.map.banner.src;
 const BANNER_MOBILE_SRC = cloudinaryAssets.map.bannerMobile.src;
 
 /** Kích thước pixel ảnh gốc = viewBox. Desktop ngang, mobile dọc. */
-const VB_DESKTOP = { w: 2752, h: 1536 };
+const VB_DESKTOP = { w: 1678, h: 937 };
 const VB_MOBILE = { w: 768, h: 1376 };
 
 /**
@@ -41,9 +41,9 @@ const VB_MOBILE = { w: 768, h: 1376 };
  * Quạt (vòng vàng giữa), Tre (trên–phải).
  */
 const ZONES = [
-  { slug: "nghe-moc", cx: 22.7, cy: 28, d: 14 }, // Mộc (medallion gỗ, trên – trái)
-  { slug: "nghe-quat", cx: 50, cy: 49.9, d: 18 }, // Quạt (vòng vàng phát sáng, giữa)
-  { slug: "nghe-tre", cx: 80, cy: 29, d: 14 }, // Tre (medallion tre, trên – phải)
+  { slug: "nghe-moc", cx: 20, cy: 35, d: 14 }, // Mộc (medallion gỗ, trên – trái)
+  { slug: "nghe-quat", cx: 46, cy: 52, d: 16 }, // Quạt (vòng vàng phát sáng, giữa)
+  { slug: "nghe-tre", cx: 78, cy: 31, d: 13 }, // Tre (medallion tre, trên – phải)
 ];
 
 /**
