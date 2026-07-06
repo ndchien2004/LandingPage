@@ -41,9 +41,9 @@ const VB_MOBILE = { w: 768, h: 1376 };
  * Quạt (vòng vàng giữa), Tre (trên–phải).
  */
 const ZONES = [
-  { slug: "nghe-moc", cx: 20, cy: 35, d: 14 }, // Mộc (medallion gỗ, trên – trái)
-  { slug: "nghe-quat", cx: 46, cy: 52, d: 16 }, // Quạt (vòng vàng phát sáng, giữa)
-  { slug: "nghe-tre", cx: 78, cy: 31, d: 13 }, // Tre (medallion tre, trên – phải)
+  { slug: "nghe-moc", cx: 22.5, cy: 28, d: 14 }, // Mộc (medallion gỗ, trên – trái)
+  { slug: "nghe-quat", cx: 50, cy: 50, d: 18 }, // Quạt (vòng vàng phát sáng, giữa)
+  { slug: "nghe-tre", cx: 79.8, cy: 29.5, d: 13 }, // Tre (medallion tre, trên – phải)
 ];
 
 /**
