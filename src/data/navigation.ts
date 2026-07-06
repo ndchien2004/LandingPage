@@ -6,7 +6,6 @@ export type NavItem = {
 export const mainNav: NavItem[] = [
   { label: "Trang chủ", href: "/" },
   { label: "Giới thiệu", href: "/gioi-thieu" },
-  { label: "Dự án", href: "/du-an" },
   { label: "Sản phẩm", href: "/san-pham" },
   { label: "Tin tức", href: "/tin-tuc" },
   { label: "Liên hệ", href: "/lien-he" },
@@ -27,7 +26,6 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     title: "Về dự án",
     items: [
       { label: "Giới thiệu", href: "/gioi-thieu" },
-      { label: "Dự án Gió Từ Làng", href: "/du-an" },
       { label: "Tin tức & câu chuyện", href: "/tin-tuc" },
     ],
   },

@@ -8,10 +8,18 @@ function imageUrl(publicPath: string, transforms?: string, version?: string) {
 
 /**
  * Ảnh sản phẩm trong thư mục Cloudinary `GioTuLangLandingPage/products`
- * (upload bằng scripts/upload-product-assets.mjs). Crop 4:5 khớp khung ProductCard.
+ * (upload bằng scripts/upload-product-assets.mjs).
+ *
+ * - `card`: fit trọn ảnh vào khung ~1000px, GIỮ NGUYÊN tỉ lệ gốc (c_fit → không cắt)
+ *   nên ảnh ngang/vuông/dọc đều hiển thị đầy đủ.
+ * - `full`: bản độ phân giải cao (cạnh dài ≤ 2000px, c_limit) dùng cho chế độ phóng to.
  */
-export function productImage(publicId: string) {
-  return imageUrl(`products/${publicId}.jpg`, "f_auto,q_auto,c_fill,w_900,h_1125");
+export function productImage(publicId: string, variant: "card" | "full" = "card") {
+  const transforms =
+    variant === "full"
+      ? "f_auto,q_auto:best,c_limit,w_2000,h_2000"
+      : "f_auto,q_auto,c_fit,w_1000,h_1000";
+  return imageUrl(`products/${publicId}.jpg`, transforms);
 }
 
 const cloudinaryVideoBase = "https://res.cloudinary.com/dzwimbvjh/video/upload";
@@ -179,6 +187,49 @@ export const cloudinaryAssets = {
         src: videoUrl("crafts/quat/video-lang-quat-2", "f_auto,q_auto,w_1280"),
         poster: videoPoster("crafts/quat/video-lang-quat-2", "so_3,f_auto,q_auto,w_1280"),
         alt: "Phóng sự về nghề làm quạt truyền thống ở Chàng Sơn",
+      },
+    },
+    // Bộ ảnh thật của làng nghề Tre — lưu chung thư mục products/ trên Cloudinary.
+    tre: {
+      hero: {
+        src: imageUrl("products/tre-xu-ly-2.jpg", "f_auto,q_auto:best,c_fill,w_2200"),
+        alt: "Người thợ Chàng Sơn ngồi chẻ nan tre, phía sau là sân phơi nan vàng óng",
+      },
+      cheTre: {
+        src: imageUrl("products/tre-xu-ly-1.jpg", "f_auto,q_auto,c_fill,w_1200"),
+        alt: "Người thợ dùng dao chẻ thân tre thành từng thanh nan trên thớ gỗ",
+      },
+      xuong: {
+        src: imageUrl("products/tre-xu-ly-3.jpg", "f_auto,q_auto,c_fill,w_1200"),
+        alt: "Góc xưởng đan tre với bó nan, dụng cụ và sản phẩm quanh người thợ",
+      },
+      chuotNan: {
+        src: imageUrl("products/tre-xu-ly-6.jpg", "f_auto,q_auto,c_fill,w_1600"),
+        alt: "Đôi tay đeo găng chuốt và cắt từng thanh nan tre",
+      },
+      dan: {
+        src: imageUrl("products/tre-xu-ly-5.jpg", "f_auto,q_auto,c_fill,w_1200"),
+        alt: "Người thợ đan các nan tre thành hình sản phẩm",
+      },
+      cheOng: {
+        src: imageUrl("products/tre-xu-ly-7.jpg", "f_auto,q_auto,c_fill,w_1200"),
+        alt: "Nghệ nhân ngồi chẻ ống tre thành nan bên bức tường xanh",
+      },
+      ngheNhan: {
+        src: imageUrl("products/tre-xu-ly-4.jpg", "f_auto,q_auto,c_fill,w_1600"),
+        alt: "Nghệ nhân cao tuổi mỉm cười bên những bộ nan quạt tre vừa hoàn thiện",
+      },
+      gio: {
+        src: imageUrl("products/tre-gio-tre.jpg", "f_auto,q_auto,c_fill,w_1600"),
+        alt: "Bộ sưu tập giỏ, làn tre đan thủ công bày giữa vườn",
+      },
+      chuonChuon: {
+        src: imageUrl("products/tre-chuon-chuon.jpg", "f_auto,q_auto,c_fill,w_1400"),
+        alt: "Những chú chuồn chuồn tre nhiều màu trong chiếc mẹt tre",
+      },
+      giaDung: {
+        src: imageUrl("products/tre-do-gia-dung.jpg", "f_auto,q_auto,c_fill,w_1400"),
+        alt: "Khay, rổ, đồ gia dụng đan tre xếp trên kệ trưng bày",
       },
     },
   },

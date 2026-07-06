@@ -133,3 +133,15 @@ export const products: Product[] = [
     tags: ["Gia dụng", "Mộc mạc"],
   },
 ];
+
+/** Tìm một sản phẩm theo id (dùng làm slug cho route /san-pham/[slug]). */
+export function getProductById(id: string): Product | undefined {
+  return products.find((p) => p.id === id);
+}
+
+/** Sản phẩm liên quan: cùng nhóm nghề, bỏ chính nó, tối đa `limit` sản phẩm. */
+export function getRelatedProducts(product: Product, limit = 3): Product[] {
+  return products
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, limit);
+}

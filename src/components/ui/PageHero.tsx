@@ -7,6 +7,7 @@ type PageHeroProps = {
   eyebrow?: string;
   title: string;
   subtitle?: string;
+  subtitleClassName?: string;
   accent?: string;
   align?: "left" | "center";
   breadcrumb?: Crumb[];
@@ -18,6 +19,7 @@ export function PageHero({
   eyebrow,
   title,
   subtitle,
+  subtitleClassName,
   accent = "#b23a2e",
   align = "left",
   breadcrumb,
@@ -50,9 +52,9 @@ export function PageHero({
           {subtitle && (
             <p
               className={cn(
-                // text-pretty: tránh "rơi chữ" — không để 1 từ lẻ loi ở dòng cuối
                 "mt-6 text-pretty text-lg leading-8 text-muted",
                 align === "center" && "mx-auto",
+                subtitleClassName,
               )}
             >
               {subtitle}

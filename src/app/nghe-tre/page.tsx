@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/layout/SiteShell";
-import { CraftPageTemplate } from "@/components/craft/CraftPageTemplate";
+import { TreStory } from "@/components/craft/TreStory";
 import { getCraft } from "@/data/crafts";
 
 const craft = getCraft("nghe-tre")!;
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function NgheTrePage() {
   return (
     <SiteShell>
-      <CraftPageTemplate craft={craft} />
+      <TreStory craft={craft} />
     </SiteShell>
   );
 }

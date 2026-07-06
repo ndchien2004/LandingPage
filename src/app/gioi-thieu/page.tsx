@@ -62,7 +62,7 @@ export default function GioiThieuPage() {
         breadcrumb={[{ label: "Trang chủ", href: "/" }, { label: "Giới thiệu" }]}
         eyebrow="Giới thiệu về làng"
         title="Làng nghề Chàng Sơn"
-        subtitle="Một vùng đất nơi nghề thủ công không chỉ là sinh kế, mà là bản sắc, là ký ức và là niềm tự hào được trao truyền qua bao thế hệ."
+        subtitle="Một vùng đất nơi nghề thủ công không chỉ là sinh kế, mà là bản sắc, là ký ức và là niềm tự hào được trao truyền qua bao thế hệ."
       />
 
       {/* Ảnh chính — thủy đình, dải ảnh lớn tràn viền mở đầu trang */}
@@ -136,6 +136,8 @@ export default function GioiThieuPage() {
               eyebrow="Lịch sử"
               title="Dòng chảy của một làng nghề"
               description="Từ thuở khởi nguồn đến hôm nay, nghề thủ công vẫn là mạch sống không dứt của Chàng Sơn."
+              className="max-w-none"
+              descriptionClassName="whitespace-nowrap"
             />
           </Reveal>
           <Reveal stagger className="mt-12 grid gap-6 md:grid-cols-3">
