@@ -32,7 +32,7 @@ export function PageHero({
         className="pointer-events-none absolute -top-32 right-[-10%] h-[28rem] w-[28rem] rounded-full blur-3xl"
         style={{ background: `${accent}1f` }}
       />
-      <Container className="relative py-20 sm:py-28">
+      <Container className="relative py-8 sm:py-12">
         {/* max-w-4xl: đủ rộng để câu dẫn không xuống dòng sớm khi màn còn diện tích */}
         <Reveal stagger className={cn("max-w-4xl", align === "center" && "mx-auto text-center")}>
           {breadcrumb && (
