@@ -61,7 +61,7 @@ export const cloudinaryAssets = {
   },
   logo: {
     transparent: {
-      src: imageUrl("logo/logo-transparent.png", "e_trim:10,c_fit,w_320,h_140"),
+      src: imageUrl("logo/logo-transparent.png", "e_trim:10,c_fit,w_800,h_350"),
       rawSrc: imageUrl("logo/logo-transparent.png"),
       alt: "Gio Tu Lang logo",
     },

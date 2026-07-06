@@ -237,14 +237,11 @@ export function PageTransitionProvider({
           <Image
             src={cloudinaryAssets.logo.transparent.src}
             alt={site.name}
-            width={320}
-            height={140}
+            width={800}
+            height={350}
             priority
-            className="h-24 w-auto object-contain sm:h-28"
+            className="h-36 w-auto object-contain sm:h-44"
           />
-          <p className="font-display text-2xl tracking-wide text-son">
-            {site.name}
-          </p>
         </div>
       </div>
     </PageTransitionContext.Provider>
