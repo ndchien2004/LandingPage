@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Be_Vietnam_Pro } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { cloudinaryAssets } from "@/data/cloudinaryAssets";
 import { PageTransitionProvider } from "@/components/transition/PageTransition";
 import "./globals.css";
@@ -57,6 +58,7 @@ export default function RootLayout({
     <html lang="vi" className={`${playfair.variable} ${beVietnam.variable}`}>
       <body className="bg-paper font-sans text-ink antialiased">
         <PageTransitionProvider>{children}</PageTransitionProvider>
+        <Analytics />
       </body>
     </html>
   );
