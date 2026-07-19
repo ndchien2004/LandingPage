@@ -244,44 +244,17 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
             <p className="!mt-12 text-sm italic text-muted">{article.credit}</p>
           )}
 
-          {/* Thông tin dự án & liên hệ */}
+          {/* Thông tin dự án */}
           <Reveal>
             <aside className="rounded-2xl border border-line bg-white/70 p-7 sm:p-10">
-              <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
-                <div>
-                  <h2 className="font-display text-2xl text-ink">
-                    Thông tin dự án và liên hệ
-                  </h2>
-                  <p className="mt-4 text-sm leading-7 text-muted">
-                    Dự án “Chàng Sơn Bách Nghệ” và chiến dịch “Gió từ Làng” là nỗ lực
-                    phi thương mại của nhóm sinh viên Trường Đại học FPT nhằm khôi phục
-                    và lan tỏa giá trị văn hóa truyền thống của làng nghề quạt Chàng Sơn.
-                  </p>
-                </div>
-                <ul className="space-y-2 text-sm leading-7 text-ink-soft lg:border-l lg:border-line lg:pl-10">
-                  <li>Người đại diện dự án: Lê Đăng Hưng — 0394 284 181</li>
-                  <li>
-                    Email:{" "}
-                    <a
-                      className="underline decoration-line underline-offset-4 hover:text-son"
-                      href="mailto:changsonbachnghe@gmail.com"
-                    >
-                      changsonbachnghe@gmail.com
-                    </a>
-                  </li>
-                  <li>
-                    Fanpage:{" "}
-                    <a
-                      className="underline decoration-line underline-offset-4 hover:text-son"
-                      href="https://www.facebook.com/Giotulang.vn/"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      fb.com/Giotulang.vn
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              <h2 className="font-display text-2xl text-ink">
+                Về dự án Chàng Sơn Bách Nghệ
+              </h2>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-muted">
+                Dự án “Chàng Sơn Bách Nghệ” và chiến dịch “Gió từ Làng” là nỗ lực
+                phi thương mại của nhóm sinh viên Trường Đại học FPT nhằm khôi phục
+                và lan tỏa giá trị văn hóa truyền thống của làng nghề quạt Chàng Sơn.
+              </p>
             </aside>
           </Reveal>
         </Container>

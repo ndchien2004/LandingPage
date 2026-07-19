@@ -3,7 +3,6 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { Placeholder } from "@/components/ui/Placeholder";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { site } from "@/data/site";
 
@@ -65,13 +64,6 @@ export default function LienHePage() {
                   ))}
                 </div>
               </div>
-
-              {/* Bản đồ placeholder */}
-              <Placeholder
-                label="Bản đồ làng Chàng Sơn"
-                accent="#7a3b2e"
-                className="aspect-[16/10] w-full"
-              />
             </div>
           </Reveal>
 
