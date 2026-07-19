@@ -1,5 +1,6 @@
+import Image from "next/image";
 import type { Article } from "@/data/articles";
-import { Placeholder } from "./Placeholder";
+import { TransitionLink } from "@/components/transition/TransitionLink";
 
 export function ArticleCard({
   article,
@@ -9,24 +10,36 @@ export function ArticleCard({
   featured?: boolean;
 }) {
   return (
-    <article
+    <TransitionLink
+      href={`/tin-tuc/${article.slug}`}
       className={
         featured
           ? "group grid overflow-hidden rounded-2xl border border-line bg-white/70 transition hover:shadow-[var(--shadow-card)] md:grid-cols-2"
           : "group flex flex-col overflow-hidden rounded-2xl border border-line bg-white/70 transition hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
       }
     >
-      <div className="overflow-hidden">
-        <Placeholder
-          label={article.title}
-          accent="#7a3b2e"
-          className={
-            featured
-              ? "h-full min-h-56 w-full rounded-none transition duration-700 group-hover:scale-[1.03]"
-              : "aspect-[16/10] w-full rounded-none transition duration-700 group-hover:scale-[1.03]"
-          }
-          showHint={false}
+      <div
+        className={
+          featured
+            ? "relative min-h-56 overflow-hidden"
+            : "relative aspect-[16/10] overflow-hidden"
+        }
+      >
+        <Image
+          src={article.image}
+          alt={article.title}
+          fill
+          sizes={featured ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
+          className="object-cover transition duration-700 group-hover:scale-[1.03]"
         />
+        {article.video && (
+          <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
+            <svg viewBox="0 0 16 16" className="h-3 w-3 fill-current" aria-hidden>
+              <path d="M4 2.5v11l9-5.5-9-5.5z" />
+            </svg>
+            Video
+          </span>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">
@@ -54,6 +67,6 @@ export function ArticleCard({
           </span>
         </div>
       </div>
-    </article>
+    </TransitionLink>
   );
 }
