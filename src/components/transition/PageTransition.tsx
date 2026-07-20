@@ -30,30 +30,11 @@ const BLADES = 14; // số nan quạt
 const ARC = 200; // tổng góc xòe (độ) — >180° để phủ kín hai góc trên
 const STEP = ARC / BLADES; // bước góc giữa hai nan
 const SPREAD = 1.85; // hệ số chồm mép nan (×½ bước) → các nan đè nhau, không hở khe
+const HALF = (STEP / 2) * SPREAD; // nửa góc mở của MỘT nan (độ)
 
 /** Góc target của nan i (đo từ trục đáy–giữa, 0° = thẳng đứng lên, + sang phải). */
 function bladeAngle(i: number) {
   return -ARC / 2 + (i + 0.5) * STEP;
-}
-
-/**
- * Góc GẬP ban đầu của nan i: mọi nan dồn chồng về biên trái. Chỉ phụ thuộc chỉ số nan
- * (không phụ thuộc kích thước màn), nên dùng được cho cả pha che lẫn pha lộ.
- */
-function foldRotation(i: number) {
-  return -(i + 0.5) * STEP;
-}
-
-/** Path một nan quạt: sector mảnh từ trục (px,py) bán kính r, vẽ ở góc target của nó. */
-function bladePath(px: number, py: number, r: number, angleDeg: number) {
-  const half = (STEP / 2) * SPREAD;
-  const a0 = ((angleDeg - half) * Math.PI) / 180;
-  const a1 = ((angleDeg + half) * Math.PI) / 180;
-  const x0 = px + r * Math.sin(a0);
-  const y0 = py - r * Math.cos(a0);
-  const x1 = px + r * Math.sin(a1);
-  const y1 = py - r * Math.cos(a1);
-  return `M ${px} ${py} L ${x0.toFixed(1)} ${y0.toFixed(1)} A ${r} ${r} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
 }
 
 type Dims = { w: number; h: number };
@@ -61,8 +42,11 @@ type Dims = { w: number; h: number };
 /**
  * Bao toàn bộ ứng dụng (đặt trong root layout). Khi đổi route, một chiếc quạt giấy gồm
  * nhiều nan XÒE ra từ trục đáy–giữa theo hình cung che kín màn hình, đổi trang, rồi GẬP
- * lại để lộ trang mới. Logo hiện ở giữa quạt. Logic & routing không đổi: chỉ bọc thêm
- * hoạt cảnh quanh router.push.
+ * lại để lộ trang mới. Logo hiện ở giữa quạt.
+ *
+ * Mỗi nan là một <div> cắt hình nêm bằng clip-path và xoay bằng CSS transform quanh trục
+ * đáy–giữa — transform trên DOM được GPU composite nên mượt trên điện thoại (bản cũ xoay
+ * <path> SVG buộc trình duyệt raster lại cả màn mỗi frame → giật trên máy yếu).
  */
 export function PageTransitionProvider({
   children,
@@ -73,12 +57,12 @@ export function PageTransitionProvider({
   const pathname = usePathname();
   const overlayRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
-  const bladesRef = useRef<SVGPathElement[]>([]);
+  const bladesRef = useRef<HTMLDivElement[]>([]);
   const pendingRef = useRef(false);
 
   const [dims, setDims] = useState<Dims>({ w: 1920, h: 1080 });
 
-  // Đo viewport (client) và dựng lại khi resize — path nan phụ thuộc kích thước thật.
+  // Đo viewport (client) và dựng lại khi resize — kích thước nan phụ thuộc màn thật.
   useLayoutEffect(() => {
     const measure = () =>
       setDims({ w: window.innerWidth, h: window.innerHeight });
@@ -87,49 +71,40 @@ export function PageTransitionProvider({
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  const { px, py, radius } = useMemo(() => {
-    const cx = dims.w / 2;
-    const cy = dims.h; // trục ở đáy–giữa
-    // Bán kính vượt góc xa nhất (góc trên) → nan luôn phủ tới mép màn.
-    const r = 1.15 * Math.hypot(dims.w / 2, dims.h);
-    return { px: cx, py: cy, radius: r };
+  const { radius, bladeW } = useMemo(() => {
+    // Bán kính vượt góc xa nhất (góc trên) → nan luôn phủ tới mép màn; mép ngoài của
+    // nêm là đường thẳng nên nhân dư để dây cung vẫn nằm ngoài màn.
+    const r = 1.2 * Math.hypot(dims.w / 2, dims.h);
+    return { radius: r, bladeW: 2 * r * Math.tan((HALF * Math.PI) / 180) };
   }, [dims]);
-
-  const svgOrigin = `${px} ${py}`;
-
-  const blades = useMemo(
-    () =>
-      Array.from({ length: BLADES }, (_, i) =>
-        bladePath(px, py, radius, bladeAngle(i)),
-      ),
-    [px, py, radius],
-  );
 
   const navigate = useCallback<TransitionFn>(
     (href) => {
       if (!href || href === pathname) return;
 
       const overlay = overlayRef.current;
-      const paths = bladesRef.current.filter(Boolean);
+      const blades = bladesRef.current.filter(Boolean);
       const reduce =
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      if (!overlay || paths.length === 0 || reduce) {
+      if (!overlay || blades.length === 0 || reduce) {
         router.push(href);
         return;
       }
 
+      // Màn cảm ứng: nhịp ngắn hơn cho cảm giác gọn, đỡ chắn thao tác.
+      const coarse = window.matchMedia("(pointer: coarse)").matches;
+      const dur = coarse ? 0.48 : 0.62;
+      const stag = coarse ? 0.02 : 0.028;
+
       pendingRef.current = true;
-      gsap.killTweensOf(paths);
+      gsap.killTweensOf(blades);
       gsap.killTweensOf(innerRef.current);
 
       gsap.set(overlay, { display: "block" });
-      // Gập: mọi nan dồn về biên trái.
-      gsap.set(paths, {
-        rotation: (i: number) => foldRotation(i),
-        svgOrigin,
-      });
+      // Gập: mọi nan dồn chồng về biên trái.
+      gsap.set(blades, { rotation: -ARC / 2 });
       gsap.set(innerRef.current, { autoAlpha: 0, scale: 0.9 });
 
       // router.push chỉ được gọi một lần dù timeline hay fallback chạy trước.
@@ -142,18 +117,17 @@ export function PageTransitionProvider({
 
       const tl = gsap
         .timeline()
-        // Xòe: từng nan mở ra tới góc target (rotation 0), stagger trái→phải.
-        .to(paths, {
-          rotation: 0,
-          svgOrigin,
-          duration: 0.62,
+        // Xòe: từng nan mở ra tới góc target, stagger trái→phải.
+        .to(blades, {
+          rotation: (i: number) => bladeAngle(i),
+          duration: dur,
           ease: "power3.out",
-          stagger: 0.028,
+          stagger: stag,
         })
         .to(
           innerRef.current,
-          { autoAlpha: 1, scale: 1, duration: 0.32, ease: "power2.out" },
-          "-=0.34",
+          { autoAlpha: 1, scale: 1, duration: 0.3, ease: "power2.out" },
+          "-=0.3",
         )
         .add(push);
 
@@ -163,9 +137,9 @@ export function PageTransitionProvider({
       window.setTimeout(() => {
         tl.progress(1, false);
         push();
-      }, 1400);
+      }, 1200);
     },
-    [pathname, router, svgOrigin],
+    [pathname, router],
   );
 
   // Sau khi route mới gắn xong: gập quạt về biên trái để lộ trang mới.
@@ -174,28 +148,31 @@ export function PageTransitionProvider({
     pendingRef.current = false;
 
     const overlay = overlayRef.current;
-    const paths = bladesRef.current.filter(Boolean);
-    if (!overlay || paths.length === 0) return;
+    const blades = bladesRef.current.filter(Boolean);
+    if (!overlay || blades.length === 0) return;
+
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const dur = coarse ? 0.42 : 0.52;
+    const stag = coarse ? 0.016 : 0.022;
 
     window.scrollTo(0, 0);
     gsap.set(overlay, { display: "block" });
-    gsap.set(paths, { rotation: 0, svgOrigin });
+    gsap.set(blades, { rotation: (i: number) => bladeAngle(i) });
 
     const tl = gsap
       .timeline()
       .to(innerRef.current, {
         autoAlpha: 0,
-        duration: 0.24,
+        duration: 0.2,
         ease: "power1.in",
       })
       .to(
-        paths,
+        blades,
         {
-          rotation: (i: number) => foldRotation(i),
-          svgOrigin,
-          duration: 0.52,
+          rotation: -ARC / 2,
+          duration: dur,
           ease: "power3.in",
-          stagger: 0.022,
+          stagger: stag,
         },
         0.04,
       )
@@ -203,7 +180,7 @@ export function PageTransitionProvider({
 
     // Cùng lý do fallback ở navigate(): nếu rAF bị throttle thì ép gập quạt
     // ngay để không che màn hình vô hạn.
-    const fallback = window.setTimeout(() => tl.progress(1, false), 1300);
+    const fallback = window.setTimeout(() => tl.progress(1, false), 1100);
 
     return () => {
       window.clearTimeout(fallback);
@@ -220,34 +197,50 @@ export function PageTransitionProvider({
         ref={overlayRef}
         aria-hidden="true"
         style={{ display: "none" }}
-        className="pointer-events-none fixed inset-0 z-[100] hidden overflow-hidden"
+        className="pointer-events-none fixed inset-0 z-[100] overflow-hidden"
       >
-        <svg
-          className="absolute inset-0 h-full w-full"
-          viewBox={`0 0 ${dims.w} ${dims.h}`}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <defs>
-            <linearGradient id="fan-paper" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--color-paper)" />
-              <stop offset="100%" stopColor="var(--color-paper-2)" />
-            </linearGradient>
-          </defs>
-          {blades.map((d, i) => (
-            <path
-              key={i}
-              ref={(el) => {
-                if (el) bladesRef.current[i] = el;
-              }}
-              d={d}
-              fill="url(#fan-paper)"
-              stroke="var(--color-gold)"
-              strokeWidth={Math.max(1, dims.w / 900)}
-              strokeOpacity={0.55}
-            />
-          ))}
-        </svg>
+        {Array.from({ length: BLADES }, (_, i) => (
+          <div
+            key={i}
+            ref={(el) => {
+              if (el) bladesRef.current[i] = el;
+            }}
+            style={{
+              position: "absolute",
+              left: "50%",
+              bottom: 0,
+              height: radius,
+              width: bladeW,
+              marginLeft: -bladeW / 2,
+              transformOrigin: "50% 100%",
+              transform: `rotate(${-ARC / 2}deg)`,
+              // Nêm nhọn về trục đáy–giữa; mép ngoài (trên) nằm ngoài màn nên thẳng cũng được.
+              clipPath: "polygon(50% 100%, 0 0, 100% 0)",
+              background:
+                "linear-gradient(to bottom, var(--color-paper), var(--color-paper-2))",
+              willChange: "transform",
+            }}
+          >
+            {/* Gân quạt: đường viền vàng dọc hai mép nan (bị clip một nửa → nét mảnh) */}
+            {[-HALF, HALF].map((a) => (
+              <div
+                key={a}
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  bottom: 0,
+                  width: 2,
+                  height: "100%",
+                  marginLeft: -1,
+                  transformOrigin: "50% 100%",
+                  transform: `rotate(${a}deg)`,
+                  background: "var(--color-gold)",
+                  opacity: 0.55,
+                }}
+              />
+            ))}
+          </div>
+        ))}
 
         {/* Dấu nhận diện ở giữa quạt — dùng đúng logo trên navbar */}
         <div
