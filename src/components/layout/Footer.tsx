@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition/TransitionLink";
 import { cloudinaryAssets } from "@/data/cloudinaryAssets";
 import { footerNav } from "@/data/navigation";
 import { site } from "@/data/site";
@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
           {/* Brand */}
           <div className="max-w-sm">
-            <Link href="/" className="flex items-center gap-2">
+            <TransitionLink href="/" className="flex items-center gap-2">
               <Image
                 src={cloudinaryAssets.logo.normal.src}
                 alt={site.name}
@@ -19,7 +19,7 @@ export function Footer() {
                 height={260}
                 className="h-auto w-32 object-contain"
               />
-            </Link>
+            </TransitionLink>
             <p className="mt-4 text-sm leading-7 text-muted">{site.shortDesc}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {site.socials.map((s) => (
@@ -44,12 +44,12 @@ export function Footer() {
                 <ul className="space-y-3">
                   {col.items.map((item) => (
                     <li key={item.href}>
-                      <Link
+                      <TransitionLink
                         href={item.href}
                         className="text-sm text-muted transition hover:text-son"
                       >
                         {item.label}
-                      </Link>
+                      </TransitionLink>
                     </li>
                   ))}
                 </ul>

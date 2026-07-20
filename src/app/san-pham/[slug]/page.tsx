@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition/TransitionLink";
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Container } from "@/components/ui/Container";
@@ -147,12 +147,12 @@ export default async function ProductDetailPage({
               </div>
 
               <div className="mt-8">
-                <Link
+                <TransitionLink
                   href="/san-pham"
                   className="text-sm text-ink-soft transition hover:text-son"
                 >
                   ← Về tất cả sản phẩm
-                </Link>
+                </TransitionLink>
               </div>
             </Reveal>
           </div>

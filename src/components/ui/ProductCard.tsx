@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition/TransitionLink";
 import type { Product } from "@/data/products";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <Link
+    <TransitionLink
       href={`/san-pham/${product.id}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white/70 transition duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
     >
@@ -32,6 +32,6 @@ export function ProductCard({ product }: { product: Product }) {
           </span>
         </div>
       </div>
-    </Link>
+    </TransitionLink>
   );
 }

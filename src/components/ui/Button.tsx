@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition/TransitionLink";
 import { cn } from "@/lib/utils";
 
 type ButtonProps = {
@@ -23,7 +23,7 @@ export function Button({
   className,
 }: ButtonProps) {
   return (
-    <Link
+    <TransitionLink
       href={href}
       className={cn(
         "inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition duration-300",
@@ -32,6 +32,6 @@ export function Button({
       )}
     >
       {children}
-    </Link>
+    </TransitionLink>
   );
 }

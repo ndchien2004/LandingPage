@@ -110,7 +110,7 @@ export default function GioiThieuPage() {
               </p>
             </div>
             <div className="mt-8">
-              <Button href="/du-an">Tìm hiểu dự án Gió Từ Làng</Button>
+              <Button href="/tin-tuc">Tìm hiểu dự án Gió Từ Làng</Button>
             </div>
           </Reveal>
 

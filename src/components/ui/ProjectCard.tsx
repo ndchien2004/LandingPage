@@ -1,11 +1,11 @@
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition/TransitionLink";
 import type { ProjectItem } from "@/data/projects";
 import { Placeholder } from "./Placeholder";
 
 /** Thẻ dự án — ảnh 16:9 + nhãn danh mục + tiêu đề (layout giống trang dự án tham chiếu). */
 export function ProjectCard({ project }: { project: ProjectItem }) {
   return (
-    <Link
+    <TransitionLink
       href={project.href}
       className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white/70 transition duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card)]"
     >
@@ -38,6 +38,6 @@ export function ProjectCard({ project }: { project: ProjectItem }) {
           </span>
         </span>
       </div>
-    </Link>
+    </TransitionLink>
   );
 }

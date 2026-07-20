@@ -24,7 +24,7 @@ export const heroSlides: HeroSlide[] = [
     subtitle:
       "Có những nghề được giữ lại không bằng sách vở, mà bằng đôi tay. Hãy bắt đầu hành trình về Chàng Sơn — nơi gió kể lại câu chuyện của quạt, mộc và tre.",
     cta: "Bắt đầu hành trình",
-    href: "/du-an",
+    href: "/gioi-thieu",
     accent: "#b23a2e",
   },
   {

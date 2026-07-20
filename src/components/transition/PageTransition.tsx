@@ -132,7 +132,15 @@ export function PageTransitionProvider({
       });
       gsap.set(innerRef.current, { autoAlpha: 0, scale: 0.9 });
 
-      gsap
+      // router.push chỉ được gọi một lần dù timeline hay fallback chạy trước.
+      let pushed = false;
+      const push = () => {
+        if (pushed) return;
+        pushed = true;
+        router.push(href);
+      };
+
+      const tl = gsap
         .timeline()
         // Xòe: từng nan mở ra tới góc target (rotation 0), stagger trái→phải.
         .to(paths, {
@@ -147,7 +155,15 @@ export function PageTransitionProvider({
           { autoAlpha: 1, scale: 1, duration: 0.32, ease: "power2.out" },
           "-=0.34",
         )
-        .add(() => router.push(href));
+        .add(push);
+
+      // GSAP chạy bằng requestAnimationFrame — bị trình duyệt throttle/dừng khi tab ẩn
+      // hoặc máy tiết kiệm pin (hay gặp trên điện thoại) → timeline đứng im, quạt che màn
+      // mà không bao giờ đổi trang. Fallback: quá hạn thì ép timeline về cuối và vẫn push.
+      window.setTimeout(() => {
+        tl.progress(1, false);
+        push();
+      }, 1400);
     },
     [pathname, router, svgOrigin],
   );
@@ -185,7 +201,12 @@ export function PageTransitionProvider({
       )
       .set(overlay, { display: "none" });
 
+    // Cùng lý do fallback ở navigate(): nếu rAF bị throttle thì ép gập quạt
+    // ngay để không che màn hình vô hạn.
+    const fallback = window.setTimeout(() => tl.progress(1, false), 1300);
+
     return () => {
+      window.clearTimeout(fallback);
       tl.kill();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

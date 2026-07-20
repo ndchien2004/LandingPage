@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition/TransitionLink";
 import { cn } from "@/lib/utils";
 
 export type Crumb = { label: string; href?: string };
@@ -24,9 +24,9 @@ export function Breadcrumb({
           <span key={item.label} className="flex items-center gap-2">
             {i > 0 && <span className="text-line">/</span>}
             {item.href && !last ? (
-              <Link href={item.href} className="transition hover:text-son">
+              <TransitionLink href={item.href} className="transition hover:text-son">
                 {item.label}
-              </Link>
+              </TransitionLink>
             ) : (
               <span className="text-ink-soft">{item.label}</span>
             )}
